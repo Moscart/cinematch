@@ -24,6 +24,13 @@
     --input: 12 6.5% 15.1%;
     --ring: 20.5 90.2% 48.2%;
     --radius: 0.5rem;
+    --green: #22c55e;
+    --dark-green: #052e16;
+    --yellow: #eab308;
+    --dark-yellow: #422006;
+    --red: #e11d48;
+    --dark-red: #4c0519;
+    --gray: #374151;
   }
 }
 
@@ -34,8 +41,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
 }
 
-h1 {
-  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+.snapped {
+  @apply opacity-100 transition-opacity duration-500;
 }
