@@ -8,7 +8,6 @@ export async function GET(
 ) {
   try {
     const page = params.page;
-    console.log(page);
     const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&region=ID`;
     const data: IMovieList = await api.fetch(url);
 
