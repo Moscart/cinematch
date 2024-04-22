@@ -1,4 +1,3 @@
-// import { StemmerEn, StopwordsEn } from "@nlpjs/lang-en";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
@@ -61,10 +60,6 @@ async function getUpcoming() {
 }
 
 export default async function Home() {
-  // const stemmer = new StemmerEn();
-  // stemmer.stopwords = new StopwordsEn();
-  // const input = "asdf";
-  // console.log(stemmer.tokenizeAndStem(input, false));
   const dataNowPlaying = await getNowPlaying();
   const dataPopular = await getPopular();
   const dataUpcoming = await getUpcoming();
@@ -84,17 +79,18 @@ export default async function Home() {
       >
         <div className="p-24 w-1/2 max-w-screen-lg flex flex-col gap-5">
           <p className="text-5xl text-center font-semibold">
-            <span className="text-primary">Unlock</span> Your Perfect Movie
-            Match with Cine<span className="text-primary">match!</span>
+            <span className="text-primary">Temukan</span> Cerita yang Sesuai
+            denganmu di Cine
+            <span className="text-primary">match!</span>
           </p>
           <div className="flex flex-row gap-2">
             <Input
               className="bg-background"
               type="email"
-              placeholder="Keyword"
+              placeholder="Kata Kunci"
             />
             <Button>
-              <Search className="size-4 me-2" /> Search
+              <Search className="size-4 me-2" /> Cari
             </Button>
           </div>
         </div>
