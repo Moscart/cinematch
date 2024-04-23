@@ -1,6 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { IStringLimiter } from "./type";
+import { removeStopwords, ind } from "stopword";
+
+const { Stemmer, Tokenizer } = require("sastrawijs");
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -50,4 +53,14 @@ export const stringLimiter = ({ text, length }: IStringLimiter): string => {
   const truncatedText = text.substring(0, length - 3) + "...";
 
   return truncatedText;
+};
+
+export const nlp = ({ text }: { text: String }) => {
+  const stemmer = new Stemmer();
+  const tokenizer = new Tokenizer();
+  const words = removeStopwords(tokenizer.tokenize(text), ind);
+  const finalResult = words.map((word) => {
+    return stemmer.stem(word);
+  });
+  return finalResult;
 };
