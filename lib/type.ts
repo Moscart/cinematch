@@ -1,3 +1,7 @@
+import { GENRE_MOVIE } from "./constant";
+
+export type GenreId = keyof typeof GENRE_MOVIE;
+
 export interface IMovieList {
   dates: {
     maximum: string;
@@ -12,7 +16,7 @@ export interface IMovieList {
 export interface IMovie {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids: GenreId[];
   id: number;
   original_language: string;
   original_title: string;
