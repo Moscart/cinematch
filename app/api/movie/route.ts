@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
 import { IMovieList } from "@/lib/type";
-import { api } from "@/lib/utils";
+import { api, nlp } from "@/lib/utils";
 import { translateToId } from "@/lib/translate";
 import { GENRE_MOVIE } from "@/lib/constant";
-
-import { removeStopwords, ind } from "stopword";
-const { Stemmer, Tokenizer } = require("sastrawijs");
 
 export async function GET() {
   const posts = await prisma.movie.findMany();
@@ -41,20 +38,13 @@ export async function POST(request: NextRequest) {
       const genre_ids = movie.genre_ids.join(", ");
 
       const input = [movie.overview, movie.original_title, genre].join(" ");
-      const stemmer = new Stemmer();
-      const tokenizer = new Tokenizer();
-      const words = removeStopwords(tokenizer.tokenize(input), ind);
-      const finalResult = words
-        .map((word) => {
-          return stemmer.stem(word);
-        })
-        .join(", ");
+      const words = nlp({ text: input }).join(", ");
 
       return {
         ...movie,
         genre: genre,
         genre_ids: genre_ids,
-        words: finalResult,
+        words: words,
       };
     });
     return newData;
