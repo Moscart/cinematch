@@ -1,9 +1,9 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import { NowPlaying } from "./component/now_playing";
-import { Popular } from "./component/popular";
-import { Upcoming } from "./component/upcoming";
+import { NowPlaying } from "./components/now_playing";
+import { Popular } from "./components/popular";
+import { Upcoming } from "./components/upcoming";
 import { api } from "@/lib/utils";
 import { IMovie, IMovieList } from "@/lib/type";
 async function getNowPlaying() {
