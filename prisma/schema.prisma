@@ -21,13 +21,20 @@ model Movie {
   original_language String
   original_title String
   overview String? @db.Text
-  popularity Int
+  popularity Decimal? @db.Decimal(10, 3)
   poster_path String?
   release_date String
   title String
   video Boolean
-  vote_average Int
+  vote_average Decimal? @db.Decimal(10, 3)
   vote_count Int
   genre String
   words String @db.Text
+}
+
+model Testing{
+  id Int @id
+  angka Float
+  double Float @db.Double
+  desimal Decimal @db.Decimal(10, 3)
 }
