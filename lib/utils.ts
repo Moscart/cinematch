@@ -55,7 +55,7 @@ export const stringLimiter = ({ text, length }: IStringLimiter): string => {
   return truncatedText;
 };
 
-export const nlp = ({ text }: { text: String }) => {
+export const nlp = ({ text }: { text: string }) => {
   const stemmer = new Stemmer();
   const tokenizer = new Tokenizer();
   const words = removeStopwords(tokenizer.tokenize(text), ind);
