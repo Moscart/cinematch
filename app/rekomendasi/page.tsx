@@ -101,10 +101,12 @@ export default async function Rekomendasi({
     bd.map((bobot) => Math.pow(bobot, 2))
   );
 
-  const totalVectorQuery = vectorQuery.reduce((sum, num) => sum + num, 0);
+  const totalVectorQuery = Math.sqrt(
+    vectorQuery.reduce((sum, num) => sum + num, 0)
+  );
 
   const totalVectorData = vectorData.map((vd) =>
-    vd.reduce((sum, num) => sum + num, 0)
+    Math.sqrt(vd.reduce((sum, num) => sum + num, 0))
   );
 
   //Cosine Similarity
