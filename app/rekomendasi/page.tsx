@@ -101,17 +101,19 @@ export default async function Rekomendasi({
     bd.map((bobot) => Math.pow(bobot, 2))
   );
 
-  const totalVectorQuery = Math.sqrt(
-    vectorQuery.reduce((sum, num) => sum + num, 0)
-  );
+  const totalVectorQuery = vectorQuery.reduce((sum, num) => sum + num, 0);
 
   const totalVectorData = vectorData.map((vd) =>
-    Math.sqrt(vd.reduce((sum, num) => sum + num, 0))
+    vd.reduce((sum, num) => sum + num, 0)
   );
+
+  const akarVectorQuery = Math.sqrt(totalVectorQuery);
+
+  const akarVectorData = totalVectorData.map((tvd) => Math.sqrt(tvd));
 
   //Cosine Similarity
   const cosineSimilarity = totalBobotQueryDocument.map((tqd, index) => {
-    return tqd / (totalVectorQuery * totalVectorData[index]);
+    return tqd / (akarVectorQuery * akarVectorData[index]);
   });
 
   //Rekomendasi
@@ -297,6 +299,15 @@ export default async function Rekomendasi({
               {data.map((movie, index) => {
                 return (
                   <TableCell key={movie.id}>{totalVectorData[index]}</TableCell>
+                );
+              })}
+            </TableRow>
+            <TableRow>
+              <TableCell>Akar</TableCell>
+              <TableCell>{akarVectorQuery}</TableCell>
+              {data.map((movie, index) => {
+                return (
+                  <TableCell key={movie.id}>{akarVectorData[index]}</TableCell>
                 );
               })}
             </TableRow>
