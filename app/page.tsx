@@ -80,19 +80,21 @@ export default async function Home() {
         <div className="p-24 w-1/2 max-w-screen-lg flex flex-col gap-5">
           <p className="text-5xl text-center font-semibold">
             <span className="text-primary">Temukan</span> Cerita yang Sesuai
-            denganmu di Cine
-            <span className="text-primary">match!</span>
+            denganmu di Cine<span className="text-primary">match!</span>
           </p>
-          <div className="flex flex-row gap-2">
-            <Input
-              className="bg-background"
-              type="email"
-              placeholder="Kata Kunci"
-            />
-            <Button>
-              <Search className="size-4 me-2" /> Cari
-            </Button>
-          </div>
+          <form action={"/rekomendasi"} method="GET">
+            <div className="flex flex-row gap-2">
+              <Input
+                className="bg-background"
+                type="text"
+                name="keywords"
+                placeholder="Kata Kunci"
+              />
+              <Button>
+                <Search className="size-4 me-2" /> Cari
+              </Button>
+            </div>
+          </form>
         </div>
       </div>
       <NowPlaying data={dataNowPlaying} />
