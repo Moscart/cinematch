@@ -89,6 +89,7 @@ export default async function Home() {
                 type="text"
                 name="keywords"
                 placeholder="Kata Kunci"
+                autoComplete="off"
               />
               <Button>
                 <Search className="size-4 me-2" /> Cari
