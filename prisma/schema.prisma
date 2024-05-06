@@ -32,9 +32,21 @@ model Movie {
   words String @db.Text
 }
 
-model Testing{
+model Sample {
+  adult Boolean
+  backdrop_path String? 
   id Int @id
-  angka Float
-  double Float @db.Double
-  desimal Decimal @db.Decimal(10, 3)
+  genre_ids String
+  original_language String
+  original_title String
+  overview String? @db.Text
+  popularity Decimal? @db.Decimal(10, 3)
+  poster_path String?
+  release_date String
+  title String
+  video Boolean
+  vote_average Decimal? @db.Decimal(10, 3)
+  vote_count Int
+  genre String
+  words String @db.Text
 }
