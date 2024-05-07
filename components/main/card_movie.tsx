@@ -1,9 +1,8 @@
 import React from "react";
 import { Tilt } from "react-tilt";
 import moment from "moment";
+import "moment/locale/id";
 import { CardImage } from "./card_image";
-
-moment.locale("id-ID");
 
 interface ICardMovie {
   title: string;

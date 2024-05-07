@@ -10,6 +10,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import moment from "moment";
+import "moment/locale/id";
 import { CardImage } from "@/components/main/card_image";
 import { IMovie } from "@/lib/type";
 import { Button } from "@/components/ui/button";
