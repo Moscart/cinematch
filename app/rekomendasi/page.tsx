@@ -7,7 +7,6 @@ import { Movie } from "@prisma/client";
 import moment from "moment";
 import "moment/locale/id";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 export default function Sample({
   searchParams,
