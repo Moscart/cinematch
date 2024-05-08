@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
 import { IMovieList } from "@/lib/type";
 import { api, nlp } from "@/lib/utils";
-import { translateToId } from "@/lib/translate";
+import { translateToId } from "@/lib/serverUtils";
 import { GENRE_MOVIE } from "@/lib/constant";
 
 export async function GET() {

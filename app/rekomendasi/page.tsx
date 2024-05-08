@@ -2,7 +2,7 @@
 
 import { CardImage } from "@/components/main/card_image";
 import { Button } from "@/components/ui/button";
-import { recommendation } from "@/lib/translate";
+import { recommendation } from "@/lib/serverUtils";
 import { Movie } from "@prisma/client";
 import moment from "moment";
 import "moment/locale/id";
