@@ -4,7 +4,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface ICardImage {
-  posterPath: string;
+  posterPath: string | null;
   alt: string;
   defaultImage?: string;
   className?: string;
