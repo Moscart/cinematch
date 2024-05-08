@@ -10,7 +10,7 @@ import {
 import { nlp } from "@/lib/utils";
 import prisma from "@/prisma/client";
 
-export default async function Rekomendasi({
+export default async function Sample({
   searchParams,
 }: Readonly<{
   searchParams: { [key: string]: string | string[] | undefined };
@@ -19,7 +19,7 @@ export default async function Rekomendasi({
   const keywords = `${searchParams.keywords}`;
   const filterKeywords = nlp({ text: keywords });
 
-  const data = await prisma.movie.findMany({
+  const data = await prisma.sample.findMany({
     select: {
       id: true,
       original_title: true,
@@ -36,7 +36,7 @@ export default async function Rekomendasi({
   const filterWords = Array.from(new Set(flatWords));
 
   //Frekuensi Keywords
-  const queryFrequency = filterKeywords.map((word) => {
+  const queryFrequency = filterWords.map((word) => {
     const keywordsLength = filterKeywords.length;
     const totalWords = filterKeywords.filter(
       (keyword) => keyword === word
@@ -48,7 +48,7 @@ export default async function Rekomendasi({
   //Frekuensi Kata Pada Film
   const dataFrequency = data.map((movie) => {
     const words = movie.words.split(", ");
-    const wordsFrequency = filterKeywords.map((word) => {
+    const wordsFrequency = filterWords.map((word) => {
       const wordsLength = words.length;
       const totalWords = words.filter((wordMovie) => word === wordMovie).length;
       const frequency = totalWords / wordsLength;
@@ -58,10 +58,13 @@ export default async function Rekomendasi({
   });
 
   //Dokumen Frekuensi
-  const totalFrequency = [queryFrequency, ...dataFrequency];
+  const totalFrequency = [...dataFrequency];
   const maxLength = Math.max(...totalFrequency.map((arr) => arr.length));
-  const documentFrequency = Array.from({ length: maxLength }, (_, i) =>
-    totalFrequency.reduce((count, arr) => count + (arr[i] !== 0 ? 1 : 0), 0)
+  const documentFrequency = Array.from(
+    { length: maxLength },
+    (_, i) =>
+      totalFrequency.reduce((count, arr) => count + (arr[i] !== 0 ? 1 : 0), 0) +
+      1
   );
 
   //Invers Dokumen Frekuensi
@@ -146,7 +149,7 @@ export default async function Rekomendasi({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterKeywords.map((word, index) => (
+            {filterWords.map((word, index) => (
               <TableRow key={word}>
                 <TableCell className="font-medium">{word}</TableCell>
                 <TableCell>{queryFrequency[index]}</TableCell>
@@ -175,7 +178,7 @@ export default async function Rekomendasi({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterKeywords.map((word, index) => (
+            {filterWords.map((word, index) => (
               <TableRow key={word}>
                 <TableCell className="font-medium">{word}</TableCell>
                 <TableCell>{documentFrequency[index]}</TableCell>
@@ -202,7 +205,7 @@ export default async function Rekomendasi({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterKeywords.map((word, index) => (
+            {filterWords.map((word, index) => (
               <TableRow key={word}>
                 <TableCell className="font-medium">{word}</TableCell>
                 <TableCell>{bobotQuery[index]}</TableCell>
@@ -234,7 +237,7 @@ export default async function Rekomendasi({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterKeywords.map((word, index) => (
+            {filterWords.map((word, index) => (
               <TableRow key={word}>
                 <TableCell className="font-medium">{word}</TableCell>
                 {data.map((movie, indexData) => {
@@ -278,7 +281,7 @@ export default async function Rekomendasi({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterKeywords.map((word, index) => (
+            {filterWords.map((word, index) => (
               <TableRow key={word}>
                 <TableCell className="font-medium">{word}</TableCell>
                 <TableCell>{vectorQuery[index]}</TableCell>
