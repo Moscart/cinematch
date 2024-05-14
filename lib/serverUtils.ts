@@ -14,7 +14,7 @@ export async function recommendation(keywords: string) {
   //Keywords Pengguna
   const filterKeywords = nlp({ text: keywords });
 
-  const data = await prisma.sample.findMany();
+  const data = await prisma.movie.findMany();
 
   //Kata Pada Film
   const words = data.map((movie) => movie.words.split(", "));
