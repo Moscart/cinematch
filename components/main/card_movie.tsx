@@ -28,7 +28,7 @@ export const CardMovie: React.FC<ICardMovie> = ({
     reset: true, // If the tilt effect has to be reset on exit.
     easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
   };
-  const movieVote = Math.floor(vote * 10);
+  const movieVote = Math.ceil(vote * 10);
 
   const getColor = (movieVote: number, dark: boolean = false) => {
     let colorClass;
