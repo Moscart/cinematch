@@ -23,7 +23,7 @@
     "google-translate-api-x": "^10.6.8",
     "lucide-react": "^0.340.0",
     "moment": "^2.30.1",
-    "next": "14.1.0",
+    "next": "^14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-tilt": "^1.0.2",
