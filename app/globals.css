@@ -49,3 +49,47 @@
 .snapped {
   @apply opacity-100 transition-opacity duration-500;
 }
+
+/* Loading Animation */
+.scaling-letter {
+  display: inline-block;
+  animation: scaleAnimation 1.2s infinite alternate ease-in-out,
+    blurAnimation 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes scaleAnimation {
+  100% {
+    transform: scale(0.5);
+  }
+}
+
+@keyframes blurAnimation {
+  0% {
+    filter: blur(0);
+  }
+  100% {
+    filter: blur(0.25rem);
+  }
+}
+
+.scaling-letter:nth-child(1) {
+  animation-delay: 0s;
+}
+.scaling-letter:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.scaling-letter:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.scaling-letter:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.scaling-letter:nth-child(5) {
+  animation-delay: 0.8s;
+}
+.scaling-letter:nth-child(6) {
+  animation-delay: 1s;
+}
+.scaling-letter:nth-child(7) {
+  animation-delay: 1.2s;
+}
