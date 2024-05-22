@@ -64,3 +64,9 @@ export const nlp = ({ text }: { text: string }) => {
   });
   return finalResult;
 };
+
+export const formatTime = (time: number) => {
+  const hours = Math.floor(time / 60);
+  const minutes = time % 60;
+  return `${hours} jam ${minutes} menit`;
+};
