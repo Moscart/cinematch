@@ -113,6 +113,8 @@ export async function recommendation(keywords: string) {
     (value, index) => [value, data[index]]
   );
 
+  pairedArray.sort((a, b) => b[0] - a[0]);
+
   const filteredArray = pairedArray.filter(([similarity]) => similarity !== 0);
   const top10Array = filteredArray.slice(0, 10);
 
