@@ -3,6 +3,7 @@ import { Tilt } from "react-tilt";
 import moment from "moment";
 import "moment/locale/id";
 import { CardImage } from "./card_image";
+import Score from "./score";
 
 interface ICardMovie {
   title: string;
@@ -27,21 +28,6 @@ export const CardMovie: React.FC<ICardMovie> = ({
     axis: null, // What axis should be disabled. Can be X or Y.
     reset: true, // If the tilt effect has to be reset on exit.
     easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
-  };
-  const movieVote = Math.ceil(vote * 10);
-
-  const getColor = (movieVote: number, dark: boolean = false) => {
-    let colorClass;
-    if (movieVote >= 70) {
-      colorClass = !dark ? "--green" : "--dark-green";
-    } else if (movieVote >= 40) {
-      colorClass = !dark ? "--yellow" : "--dark-yellow";
-    } else if (movieVote > 0) {
-      colorClass = !dark ? "--red" : "--dark-red";
-    } else {
-      colorClass = !dark ? "--red" : "--gray";
-    }
-    return colorClass;
   };
 
   return (
@@ -86,27 +72,7 @@ export const CardMovie: React.FC<ICardMovie> = ({
               transform: "translateZ(30px)",
             }}
           >
-            <div
-              className="flex items-center justify-center w-12 h-12 rounded-full"
-              aria-valuenow={90}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              style={{
-                background: `radial-gradient(closest-side, hsl(var(--background)) 65%, transparent 70% 80%, hsl(var(--background)) 85% 100%), conic-gradient(var(${getColor(
-                  movieVote
-                )}) ${movieVote}%, var(${getColor(movieVote, true)}) 0)`,
-              }}
-            >
-              <div
-                className={`font-bold text-[0.85rem] ${
-                  movieVote > 0
-                    ? "after:content-['%'] after:font-light after:text-[.45rem] after:align-text-bottom"
-                    : ""
-                }`}
-              >
-                {movieVote > 0 ? movieVote : "NR"}
-              </div>
-            </div>
+            <Score vote={vote} />
           </div>
         </div>
       </div>
