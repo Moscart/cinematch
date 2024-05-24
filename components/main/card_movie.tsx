@@ -56,7 +56,7 @@ export const CardMovie: React.FC<ICardMovie> = ({
           }}
         >
           <div
-            className="flex flex-col gap-2"
+            className="grid gap-2"
             style={{
               transformStyle: "preserve-3d",
             }}
