@@ -8,6 +8,7 @@ interface ICardImage {
   alt: string;
   defaultImage?: string;
   className?: string;
+  video?: boolean;
 }
 
 export const CardImage: React.FC<ICardImage> = ({
@@ -15,6 +16,7 @@ export const CardImage: React.FC<ICardImage> = ({
   alt,
   defaultImage = "/default_poster.png",
   className,
+  video,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -28,7 +30,7 @@ export const CardImage: React.FC<ICardImage> = ({
   return (
     <Card className={cn("border-none overflow-hidden", className)}>
       <Image
-        className="aspect-[6/9] object-cover"
+        className={(video ? "aspect-video" : "aspect-[6/9]") + " object-cover"}
         alt={alt}
         src={imageSrc()}
         width={500}
