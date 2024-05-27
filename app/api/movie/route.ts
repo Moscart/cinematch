@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
 import { IMovieList } from "@/lib/type";
-import { api, nlp } from "@/lib/utils";
+import { api, textPreprocessing } from "@/lib/utils";
 import { translateToId } from "@/lib/serverUtils";
 import { GENRE_MOVIE } from "@/lib/constant";
 
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       const genre_ids = movie.genre_ids.join(", ");
 
       const input = [movie.overview, movie.original_title, genre].join(" ");
-      const words = nlp({ text: input }).join(", ");
+      const words = textPreprocessing({ text: input }).join(", ");
 
       return {
         ...movie,

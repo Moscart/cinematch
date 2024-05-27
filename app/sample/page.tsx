@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { nlp } from "@/lib/utils";
+import { textPreprocessing } from "@/lib/utils";
 import prisma from "@/prisma/client";
 
 export default async function Sample({
@@ -17,7 +17,7 @@ export default async function Sample({
 }>) {
   //Keywords Pengguna
   const keywords = `${searchParams.keywords}`;
-  const filterKeywords = nlp({ text: keywords });
+  const filterKeywords = textPreprocessing({ text: keywords });
 
   const data = await prisma.sample.findMany({
     select: {

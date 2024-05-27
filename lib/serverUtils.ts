@@ -1,7 +1,7 @@
 "use server";
 
 import translate from "google-translate-api-x";
-import { nlp } from "./utils";
+import { textPreprocessing } from "./utils";
 import prisma from "@/prisma/client";
 import { Movie } from "@prisma/client";
 
@@ -12,7 +12,7 @@ export async function translateToId(text: string | string[]) {
 
 export async function recommendation(keywords: string) {
   //Keywords Pengguna
-  const filterKeywords = nlp({ text: keywords });
+  const filterKeywords = textPreprocessing({ text: keywords });
 
   const data = await prisma.movie.findMany();
 
