@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { MESSAGE_NOT_FOUND } from "@/lib/constant";
 import { recommendation } from "@/lib/serverUtils";
 import { Movie } from "@prisma/client";
-import { AlertCircle, Loader, Search } from "lucide-react";
+import { AlertCircle, ChevronLeft, Loader, Search } from "lucide-react";
 import moment from "moment";
 import "moment/locale/id";
 import Link from "next/link";
@@ -29,9 +29,9 @@ export default function Sample({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
-  function generateRandomNumber() {
+  const generateRandomNumber = () => {
     return Math.floor(Math.random() * 10) + 1;
-  }
+  };
 
   const randomNumber = generateRandomNumber();
 
@@ -48,7 +48,21 @@ export default function Sample({
 
   return (
     <main className="min-h-screen">
-      <div className="p-24">
+      <div className="p-24 relative">
+        <Button
+          size={"lg"}
+          className="absolute text-background font-bold rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full"
+          style={{
+            background:
+              "linear-gradient(to right, transparent 0%, hsl(var(--primary)) 90%)",
+          }}
+          asChild
+        >
+          <Link href={"/"} className="flex justify-center items-center">
+            <ChevronLeft className="h-4 w-4 ms-5 me-2" strokeWidth={3} />
+            BACK
+          </Link>
+        </Button>
         <h1 className="text-center mb-24">Rekomendasi</h1>
         <form
           action={"/rekomendasi"}
@@ -63,8 +77,8 @@ export default function Sample({
               placeholder="Kata Kunci"
               autoComplete="off"
             />
-            <Button>
-              <Search className="size-4 me-2" /> Cari
+            <Button className="text-background font-bold">
+              <Search className="size-4 me-2" strokeWidth={3} /> Cari
             </Button>
           </div>
         </form>
@@ -92,14 +106,14 @@ export default function Sample({
       )}
       {!!(!loading && data.length) && (
         <div className="p-24 pt-0">
-          <div className="w-3/4 mx-auto max-w-screen-2xl">
+          <div className="mx-auto max-w-screen-xl">
             <div className="grid grid-rows-1 gap-5">
               {data.map((movie, index) => (
                 <div className="flex gap-5 flex-row" key={movie.id}>
                   <div className="basis-[15%]">
                     <CardImage
                       posterPath={movie.poster_path}
-                      alt="Godzilla Minus One"
+                      alt={`${movie.title}`}
                     />
                   </div>
                   <div className="basis-[85%] rounded-xl border bg-card p-5">
