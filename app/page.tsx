@@ -91,7 +91,7 @@ export default async function Home() {
                 placeholder="Kata Kunci"
                 autoComplete="off"
               />
-              <Button className="text-background">
+              <Button className="text-background font-bold">
                 <Search className="size-4 me-2" strokeWidth={3} /> Cari
               </Button>
             </div>
