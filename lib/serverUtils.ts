@@ -4,6 +4,8 @@ import translate from "google-translate-api-x";
 import { textPreprocessing } from "./utils";
 import prisma from "@/prisma/client";
 import { Movie } from "@prisma/client";
+import { signIn, signOut } from "@/auth";
+import { AuthError } from "next-auth";
 
 export async function translateToId(text: string | string[]) {
   const res = await translate(text, { to: "id" });
@@ -122,4 +124,27 @@ export async function recommendation(keywords: string) {
   const top10Movies = top10Array.map(([, movie]) => movie);
 
   return JSON.stringify(top10Movies);
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AuthError) {
+      if (error.type === "CredentialsSignin") {
+        return "Invalid credentials.";
+      } else {
+        return "Something went wrong.";
+      }
+    }
+    throw error;
+  }
+}
+
+export async function handleSignOut() {
+  await signOut({ redirectTo: "/admin/login" });
 }
