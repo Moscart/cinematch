@@ -12,6 +12,10 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith("/admin");
       if (isLoggedIn && nextUrl.pathname === "/admin/login") {
+        if (nextUrl.searchParams.has("callbackUrl")) {
+          const callbackUrl = nextUrl.searchParams.get("callbackUrl");
+          return NextResponse.redirect(new URL(callbackUrl as string, nextUrl));
+        }
         return NextResponse.redirect(new URL("/admin", nextUrl));
       }
       if (isOnDashboard) {
