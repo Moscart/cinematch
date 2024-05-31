@@ -1,6 +1,5 @@
 "use client";
 
-import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,33 +9,36 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { handleSignOut } from "@/lib/serverUtils";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
 
 const LogoutButton = () => {
   return (
-    // <button onClick={handleSignOut}>Sign Out</button>
     <Button
-      // disabled={isLoading}
       className="w-full font-bold text-background"
       onClick={() => handleSignOut()}
     >
-      {/* {isLoading && (
-        <Loader2
-          className="mr-2 h-4 w-4 animate-spin"
-          strokeWidth={3}
-        />
-      )} */}
       Sign out
     </Button>
   );
 };
 
 export default function Logout() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const jumlahBox = 1000;
+
+  const boxes = Array.from({ length: jumlahBox }, (_, index) => ({
+    content: `Box ${index + 1}`,
+  }));
   return (
-    <main className="min-h-screen grid place-items-center">
-      <Card className="w-full max-w-sm">
+    <main className="relative min-h-screen grid place-items-center overflow-hidden">
+      <div className="absolute flex flex-wrap gap-[.4vw] h-screen justify-center z-0 w-[105vw]">
+        {boxes.map((box) => (
+          <div
+            className="w-[4.1vw] h-[4.1vw] bg-stone-900 rounded-[.45vw] hover:bg-primary hover:transition-colors hover:duration-0 duration-custom transition-colors ease-out"
+            key={box.content}
+          ></div>
+        ))}
+      </div>
+      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
+      <Card className="w-full max-w-sm z-10 border-none shadow-2xl shadow-black">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Signout</CardTitle>
         </CardHeader>

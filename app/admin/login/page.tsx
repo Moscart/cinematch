@@ -26,9 +26,24 @@ export default function LoginForm() {
       setIsLoading(false);
     }, 400);
   };
+
+  const jumlahBox = 1000; // Ganti dengan jumlah box yang diinginkan
+
+  const boxes = Array.from({ length: jumlahBox }, (_, index) => ({
+    content: `Box ${index + 1}`,
+  }));
   return (
-    <main className="min-h-screen grid place-items-center">
-      <Card className="w-full max-w-sm">
+    <main className="relative min-h-screen grid place-items-center overflow-hidden">
+      <div className="absolute flex flex-wrap gap-[.4vw] h-screen justify-center z-0 w-[105vw]">
+        {boxes.map((box) => (
+          <div
+            className="w-[4.1vw] h-[4.1vw] bg-stone-900 rounded-[.45vw] hover:bg-primary hover:transition-colors hover:duration-0 duration-custom transition-colors ease-out"
+            key={box.content}
+          ></div>
+        ))}
+      </div>
+      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
+      <Card className="w-full max-w-sm z-10 border-none shadow-2xl shadow-black">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
         </CardHeader>
@@ -40,7 +55,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="m@example.com"
+                placeholder="Enter your Email"
                 required
                 autoComplete="off"
                 disabled={isLoading}
@@ -52,6 +67,7 @@ export default function LoginForm() {
                 id="password"
                 type="password"
                 name="password"
+                placeholder="Enter your Password"
                 required
                 disabled={isLoading}
               />

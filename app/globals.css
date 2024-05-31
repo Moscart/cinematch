@@ -61,6 +61,20 @@
 }
 
 @layer components {
+  /* Login Animation */
+  .test {
+    animation: scrollingAnimation 3s linear infinite;
+  }
+
+  @keyframes scrollingAnimation {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
   /* Loading Animation */
   .scaling-letter {
     display: inline-block;
@@ -117,4 +131,7 @@
   .scroll-bar::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
+}
+.duration-custom {
+  transition-duration: 1500ms;
 }
