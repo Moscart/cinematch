@@ -133,12 +133,16 @@ export async function authenticate(
   try {
     await signIn("credentials", formData);
   } catch (error) {
-    console.log(error);
-    if (error instanceof AuthError) {
-      if (error.type === "CredentialsSignin") {
-        return "Invalid credentials.";
-      } else {
-        return "Something went wrong.";
+    console.log({ error });
+    if (error instanceof Error) {
+      const { type, cause } = error as AuthError;
+      switch (type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        case "CallbackRouteError":
+          return cause?.err?.toString();
+        default:
+          return "Something went wrong.";
       }
     }
     throw error;
@@ -146,5 +150,5 @@ export async function authenticate(
 }
 
 export async function handleSignOut() {
-  await signOut({ redirectTo: "/admin/login" });
+  await signOut({ redirectTo: "/api/auth/signin" });
 }

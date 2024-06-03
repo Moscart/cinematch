@@ -4,25 +4,21 @@ import { NextResponse } from "next/server";
 
 export const authConfig = {
   pages: {
-    signIn: "/admin/login",
-    signOut: "/admin/logout",
+    // signIn: "/auth/login",
+    signOut: "/auth/logout",
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith("/admin");
-      if (isLoggedIn && nextUrl.pathname === "/admin/login") {
-        if (nextUrl.searchParams.has("callbackUrl")) {
-          const callbackUrl = nextUrl.searchParams.get("callbackUrl");
-          return NextResponse.redirect(new URL(callbackUrl as string, nextUrl));
-        }
+      if (isLoggedIn && nextUrl.pathname === "/auth/login") {
         return NextResponse.redirect(new URL("/admin", nextUrl));
       }
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return NextResponse.redirect(new URL("/admin", nextUrl));
+      if (
+        !isLoggedIn &&
+        (nextUrl.pathname === "/auth/logout" || isOnDashboard)
+      ) {
+        return false;
       }
       return true;
     },
