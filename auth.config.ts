@@ -11,7 +11,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith("/admin");
-      if (isLoggedIn && nextUrl.pathname === "/auth/login") {
+      if (isLoggedIn && nextUrl.pathname === "/api/auth/signin") {
         return NextResponse.redirect(new URL("/admin", nextUrl));
       }
       if (
