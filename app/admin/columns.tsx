@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,42 +12,42 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DataTableColumnHeader } from "./data-table-column-header";
+import { IMovie } from "@/lib/type";
+import Link from "next/link";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+// export type Payment = {
+//   id: string;
+//   amount: number;
+//   status: "pending" | "processing" | "success" | "failed";
+//   email: string;
+// };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<IMovie>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "original_title",
+    meta: "Judul",
     header: ({ column }) => {
-      return <DataTableColumnHeader column={column} title="Email" />;
+      return <DataTableColumnHeader column={column} title="Judul" />;
     },
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+    accessorKey: "overview",
+    meta: "Ringkasan",
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Ringkasan" />;
+    },
+  },
+  {
+    accessorKey: "genre",
+    meta: "Genre",
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Genre" />;
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const data = row.original;
 
       return (
         <DropdownMenu>
@@ -58,15 +58,28 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Aksi</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <div className="grid gap-1">
+              <Link href={`/detail/${data.id}`} target="_blank">
+                <DropdownMenuItem>
+                  <Eye className="size-4 me-2" />
+                  Lihat
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/detail/${data.id}`} target="_blank">
+                <DropdownMenuItem>
+                  <Pencil className="size-4 me-2" />
+                  Edit
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/detail/${data.id}`} target="_blank">
+                <DropdownMenuItem className="bg-red-600 focus:bg-red-900">
+                  <Trash className="size-4 me-2" />
+                  Hapus
+                </DropdownMenuItem>
+              </Link>
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
       );

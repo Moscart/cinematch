@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableViewOptions } from "./data-table-view";
+import { Label } from "@/components/ui/label";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,16 +56,42 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+    <div className="grid gap-5">
+      <div className="flex items-center">
+        <div className="flex gap-5">
+          <Input
+            id="judul"
+            placeholder="Filter judul..."
+            value={
+              (table.getColumn("original_title")?.getFilterValue() as string) ??
+              ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn("original_title")
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Input
+            placeholder="Filter ringkasan..."
+            value={
+              (table.getColumn("overview")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("overview")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Input
+            placeholder="Filter genre..."
+            value={(table.getColumn("genre")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("genre")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+        </div>
         <DataTableViewOptions table={table} />
       </div>
       <div className="rounded-md border">
