@@ -17,18 +17,16 @@ import { AlertCircle, ChevronLeft, Loader, Search } from "lucide-react";
 import moment from "moment";
 import "moment/locale/id";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FormEvent, Suspense, useEffect, useState } from "react";
 
-export default function Sample({
-  searchParams,
-}: Readonly<{
-  searchParams: { [key: string]: string | string[] | undefined };
-}>) {
-  const keywords = `${searchParams.keywords}`;
+function Rekomendasi() {
   const [data, setData] = useState<Movie[] | []>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const keywords = `${searchParams.get("keywords")}`;
 
   const generateRandomNumber = () => {
     return Math.floor(Math.random() * 10) + 1;
@@ -37,6 +35,7 @@ export default function Sample({
   const randomNumber = generateRandomNumber();
 
   useEffect(() => {
+    setLoading(true);
     recommendation(keywords)
       .then((res) => {
         setData(JSON.parse(res));
@@ -45,7 +44,14 @@ export default function Sample({
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [keywords]);
+
+  const onSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    router.push(`/rekomendasi?keywords=${formData.get("keywords")}`);
+  };
 
   return (
     <main className="min-h-screen">
@@ -65,12 +71,7 @@ export default function Sample({
           </Link>
         </Button>
         <h1 className="text-center mb-24">Rekomendasi</h1>
-        <form
-          action={(data) => {
-            redirect(`/rekomendasi?keywords=${data.get("keywords")}`);
-          }}
-          className="max-w-screen-md m-auto"
-        >
+        <form onSubmit={onSearch} className="max-w-screen-md m-auto">
           <div className="flex flex-row gap-2">
             <Input
               className="bg-background"
@@ -176,5 +177,13 @@ export default function Sample({
         </div>
       )}
     </main>
+  );
+}
+
+export default function RekomendasiPage() {
+  return (
+    <Suspense>
+      <Rekomendasi />
+    </Suspense>
   );
 }

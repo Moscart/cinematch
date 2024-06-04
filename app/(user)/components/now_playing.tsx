@@ -15,7 +15,7 @@ import { CardImage } from "@/components/main/card_image";
 import { IMovie } from "@/lib/type";
 import { Button } from "@/components/ui/button";
 import { stringLimiter } from "@/lib/utils";
-import { translateToId } from "../../lib/serverUtils";
+import { translateToId } from "@/lib/serverUtils";
 
 interface INowPlaying {
   data: IMovie[];

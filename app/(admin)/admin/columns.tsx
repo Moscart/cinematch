@@ -15,13 +15,6 @@ import { DataTableColumnHeader } from "./data-table-column-header";
 import { IMovie } from "@/lib/type";
 import Link from "next/link";
 
-// export type Payment = {
-//   id: string;
-//   amount: number;
-//   status: "pending" | "processing" | "success" | "failed";
-//   email: string;
-// };
-
 export const columns: ColumnDef<IMovie>[] = [
   {
     accessorKey: "original_title",
