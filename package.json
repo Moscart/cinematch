@@ -40,6 +40,7 @@
     "react-dom": "^18",
     "react-tilt": "^1.0.2",
     "sastrawijs": "^1.0.4",
+    "sharp": "^0.33.4",
     "sonner": "^1.4.41",
     "stopword": "^3.0.1",
     "tailwind-merge": "^2.2.1",

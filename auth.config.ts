@@ -1,17 +1,16 @@
 import type { NextAuthConfig } from "next-auth";
-import credentials from "next-auth/providers/credentials";
 import { NextResponse } from "next/server";
 
 export const authConfig = {
   pages: {
-    // signIn: "/auth/login",
+    signIn: "/auth/login",
     signOut: "/auth/logout",
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith("/admin");
-      if (isLoggedIn && nextUrl.pathname === "/api/auth/signin") {
+      if (isLoggedIn && nextUrl.pathname === "/auth/login") {
         return NextResponse.redirect(new URL("/admin", nextUrl));
       }
       if (
@@ -23,5 +22,5 @@ export const authConfig = {
       return true;
     },
   },
-  providers: [credentials({})],
+  providers: [],
 } satisfies NextAuthConfig;

@@ -126,29 +126,38 @@ export async function recommendation(keywords: string) {
   return JSON.stringify(top10Movies);
 }
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
+export async function handleSignOut() {
+  await signOut({ redirectTo: "/auth/login" });
+}
+
+export const signInWithCreds = async (
+  email: string,
+  password: string,
+  redirect: boolean = false
+) => {
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", {
+      email,
+      password,
+      redirect,
+    });
   } catch (error) {
-    console.log({ error });
     if (error instanceof Error) {
       const { type, cause } = error as AuthError;
+      let message = "";
       switch (type) {
         case "CredentialsSignin":
-          return "Invalid credentials.";
+          message = "Invalid credentials.";
+          break;
         case "CallbackRouteError":
-          return cause?.err?.toString();
+          message = cause?.err?.toString() as string;
+          break;
         default:
-          return "Something went wrong.";
+          message = "Something went wrong.";
+          break;
       }
+      return { errorMessage: message };
     }
     throw error;
   }
-}
-
-export async function handleSignOut() {
-  await signOut({ redirectTo: "/api/auth/signin" });
-}
+};
