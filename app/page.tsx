@@ -6,6 +6,7 @@ import { Popular } from "./components/popular";
 import { Upcoming } from "./components/upcoming";
 import { api } from "@/lib/utils";
 import { IMovie, IMovieList } from "@/lib/type";
+import { redirect } from "next/navigation";
 async function getNowPlaying() {
   let currentPage = 1;
   let maxPage = 0;
@@ -82,7 +83,12 @@ export default async function Home() {
             <span className="text-primary">Temukan</span> Cerita yang Sesuai
             denganmu di Cine<span className="text-primary">match!</span>
           </p>
-          <form action={"/rekomendasi"} method="GET">
+          <form
+            action={async (data) => {
+              "use server";
+              redirect(`/rekomendasi?keywords=${data.get("keywords")}`);
+            }}
+          >
             <div className="flex flex-row gap-2">
               <Input
                 className="bg-background"

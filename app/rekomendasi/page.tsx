@@ -17,6 +17,7 @@ import { AlertCircle, ChevronLeft, Loader, Search } from "lucide-react";
 import moment from "moment";
 import "moment/locale/id";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Sample({
@@ -65,8 +66,9 @@ export default function Sample({
         </Button>
         <h1 className="text-center mb-24">Rekomendasi</h1>
         <form
-          action={"/rekomendasi"}
-          method="GET"
+          action={(data) => {
+            redirect(`/rekomendasi?keywords=${data.get("keywords")}`);
+          }}
           className="max-w-screen-md m-auto"
         >
           <div className="flex flex-row gap-2">
