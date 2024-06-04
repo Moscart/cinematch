@@ -47,7 +47,6 @@ export default function FormLogin() {
           }
         })
         .finally(() => setIsLoading(false));
-      setIsLoading(false);
     }, 400);
   };
   return (
