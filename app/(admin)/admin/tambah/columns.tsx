@@ -1,7 +1,14 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import {
+  Eye,
+  MoreHorizontal,
+  Pencil,
+  PlusSquare,
+  Save,
+  Trash,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,13 +18,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DataTableColumnHeader } from "../data-table/data-table-column-header";
+import { DataTableColumnHeader } from "../../data-table/data-table-column-header";
 import { IMovie } from "@/lib/type";
 import Link from "next/link";
 
 export const columns: ColumnDef<IMovie>[] = [
   {
     accessorKey: "original_title",
+    meta: "Judul",
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Judul Asli" />;
+    },
+  },
+  {
+    accessorKey: "title",
     meta: "Judul",
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Judul" />;
@@ -62,14 +76,8 @@ export const columns: ColumnDef<IMovie>[] = [
               </Link>
               <Link href={`/detail/${data.id}`} target="_blank">
                 <DropdownMenuItem>
-                  <Pencil className="size-4 me-2" />
-                  Edit
-                </DropdownMenuItem>
-              </Link>
-              <Link href={`/detail/${data.id}`} target="_blank">
-                <DropdownMenuItem className="bg-red-600 focus:bg-red-900">
-                  <Trash className="size-4 me-2" />
-                  Hapus
+                  <Save className="size-4 me-2" />
+                  Simpan ke database
                 </DropdownMenuItem>
               </Link>
             </div>

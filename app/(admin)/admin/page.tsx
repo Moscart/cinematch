@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { DataTable } from "./data-table";
+import { DataTable } from "../data-table/data-table";
 import { columns } from "./columns";
 import { IMovie } from "@/lib/type";
 import { api } from "@/lib/utils";
