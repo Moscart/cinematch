@@ -64,3 +64,22 @@ export async function POST(request: NextRequest) {
     { status: 201 }
   );
 }
+
+export async function DELETE(request: NextRequest) {
+  const { id } = await request.json();
+
+  const movies = await prisma.movie.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return NextResponse.json(
+    {
+      success: true,
+      message: "Movie Created Successfully!",
+      data: movies,
+    },
+    { status: 201 }
+  );
+}

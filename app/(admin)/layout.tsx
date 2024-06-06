@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         {children}
-        <Toaster richColors position="top-center" />
+        <Toaster richColors position="bottom-right" />
       </body>
     </html>
   );

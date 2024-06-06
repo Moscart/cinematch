@@ -4,17 +4,17 @@ import SearchAdd from "./search";
 
 export default function TambahPage() {
   return (
-    <div>
+    <main className="min-h-screen p-24">
       <Tabs defaultValue="account">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
+        <TabsContent value="account" className="mt-5">
           <SearchAdd />
         </TabsContent>
         <TabsContent value="password">Change your password here.</TabsContent>
       </Tabs>
-    </div>
+    </main>
   );
 }
