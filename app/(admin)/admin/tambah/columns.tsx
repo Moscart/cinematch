@@ -55,7 +55,7 @@ export function customColumns(setIsLoading: Dispatch<SetStateAction<boolean>>) {
         const handleAdd = async () => {
           setIsLoading(true);
           await api
-            .fetch("/api/movie/tambah", {
+            .fetch("/api/movie", {
               method: "POST",
               body: JSON.stringify(data),
             })
