@@ -50,7 +50,7 @@ export function customColumns(
       },
       cell: ({ row }) => {
         const data = row.original;
-        return <div>{TextTruncate({ text: data.overview as string })}</div>;
+        return <div>{TextTruncate({ text: data.overview })}</div>;
       },
     },
     {
