@@ -79,16 +79,23 @@ export function customColumns(setIsLoading: Dispatch<SetStateAction<boolean>>) {
               <DropdownMenuLabel>Aksi</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="grid gap-1">
-                <Link href={`/detail/${data.id}`} target="_blank">
-                  <DropdownMenuItem>
-                    <Eye className="size-4 me-2" />
-                    Lihat
-                  </DropdownMenuItem>
-                </Link>
-                <Button onClick={handleAdd} asChild variant={"ghost"}>
+                <Button className="justify-start" asChild variant={"ghost"}>
+                  <Link href={`/detail/${data.id}`} target="_blank">
+                    <DropdownMenuItem className="px-0">
+                      <Eye className="size-4 me-2" />
+                      Lihat
+                    </DropdownMenuItem>
+                  </Link>
+                </Button>
+                <Button
+                  className="justify-start focus:ring-0"
+                  onClick={handleAdd}
+                  asChild
+                  variant={"ghost"}
+                >
                   <DropdownMenuItem>
                     <Save className="size-4 me-2" />
-                    Simpan ke database
+                    Tambah ke database
                   </DropdownMenuItem>
                 </Button>
               </div>

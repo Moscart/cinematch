@@ -5,12 +5,16 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Dashboard from "./dashboard/dashboard";
 import Tambah from "./tambah/tambah";
+import { LogOut } from "lucide-react";
 
 export default function AdminPage() {
   return (
     <main className="min-h-screen p-24 relative">
       <Button className="absolute right-24" variant={"outline"} asChild>
-        <Link href={"/auth/logout"}>Logout</Link>
+        <Link href={"/auth/logout"}>
+          <LogOut className="size-4 me-2" />
+          Logout
+        </Link>
       </Button>
       <Tabs defaultValue="dashboard">
         <TabsList>

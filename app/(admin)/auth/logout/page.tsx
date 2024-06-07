@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { handleSignOut } from "@/lib/serverUtils";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LogOut } from "lucide-react";
 import Link from "next/link";
 
 const LogoutButton = () => {
@@ -18,7 +18,8 @@ const LogoutButton = () => {
       className="w-full font-bold text-background"
       onClick={() => handleSignOut()}
     >
-      Sign out
+      <LogOut className="size-4 me-2" strokeWidth={3} />
+      Logout
     </Button>
   );
 };
@@ -62,17 +63,17 @@ export default function Logout() {
           }}
         ></div>
         <div
-          className="-z-10 w-[29px] h-[29px] absolute top-[29.5px] left-[29.5px]"
+          className="-z-10 w-[36px] h-[36px] absolute top-[24px] left-[24px]"
           style={{
             background:
-              "radial-gradient(circle at top left, transparent 29px, hsl(var(--background)) 0)",
+              "radial-gradient(circle at top left, transparent 34px, hsl(var(--background)) 0)",
           }}
         ></div>
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Signout</CardTitle>
+          <CardTitle className="text-2xl text-center">Logout</CardTitle>
         </CardHeader>
         <CardContent className="text-center">
-          Are you sure you want to sign out?
+          Are you sure you want to logout?
         </CardContent>
         <CardFooter>
           <LogoutButton />

@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signInWithCreds } from "@/lib/serverUtils";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogIn } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
@@ -85,10 +85,12 @@ export default function FormLogin() {
             disabled={isLoading}
             className="w-full font-bold text-background"
           >
-            {isLoading && (
+            {isLoading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" strokeWidth={3} />
+            ) : (
+              <LogIn className="size-4 me-2" strokeWidth={3} />
             )}
-            Sign in
+            Login
           </Button>
         </CardFooter>
       </form>

@@ -92,22 +92,21 @@ export function customColumns(
               <DropdownMenuLabel>Aksi</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="grid gap-1">
-                <Link href={`/detail/${data.id}`} target="_blank">
-                  <DropdownMenuItem>
-                    <Eye className="size-4 me-2" />
-                    Lihat
-                  </DropdownMenuItem>
-                </Link>
-                <Link href={`/detail/${data.id}`} target="_blank">
-                  <DropdownMenuItem>
-                    <Pencil className="size-4 me-2" />
-                    Edit
-                  </DropdownMenuItem>
-                </Link>
+                <Button asChild variant={"ghost"} className="justify-start">
+                  <Link href={`/detail/${data.id}`} target="_blank">
+                    <DropdownMenuItem className="px-0">
+                      <Eye className="size-4 me-2" />
+                      Lihat
+                    </DropdownMenuItem>
+                  </Link>
+                </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant={"destructive"}>
-                      <Trash className="size-4 me-2" />
+                    <Button
+                      variant={"outline"}
+                      className="justify-start border-destructive"
+                    >
+                      <Trash className="size-4 me-2 text-destructive" />
                       Hapus
                     </Button>
                   </AlertDialogTrigger>
