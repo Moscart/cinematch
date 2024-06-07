@@ -40,9 +40,9 @@ export default function Logout() {
         ))}
       </div>
       <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
-      <Card className="w-full max-w-sm z-10 border-none rounded-3xl drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] relative overflow-hidden bg-transparent">
+      <Card className="w-full max-w-sm z-10 border-none rounded-3xl shadow-none drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] relative bg-transparent">
         <Button
-          className="rounded-full h-12 w-12 absolute font-bold text-background"
+          className="rounded-full h-12 w-12 absolute font-bold text-background hover:bg-primary hover:scale-125 transition-transform ease-in-out duration-500"
           asChild
         >
           <Link href={"/admin"}>
@@ -50,13 +50,13 @@ export default function Logout() {
           </Link>
         </Button>
         <div
-          className="-z-10 w-full bg-background absolute bottom-0 rounded-tl-3xl"
+          className="-z-10 w-full bg-background absolute bottom-0 rounded-3xl"
           style={{
             height: "calc(100% - 58px)",
           }}
         ></div>
         <div
-          className="-z-10 h-full bg-background absolute right-0 rounded-tl-3xl"
+          className="-z-10 h-full bg-background absolute right-0 rounded-3xl"
           style={{
             width: "calc(100% - 58px)",
           }}
