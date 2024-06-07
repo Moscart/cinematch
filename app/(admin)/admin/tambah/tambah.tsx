@@ -11,7 +11,7 @@ import { customColumns } from "./columns";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 
-export default function SearchAdd() {
+export default function Tambah() {
   const [data, setData] = useState<IMovie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

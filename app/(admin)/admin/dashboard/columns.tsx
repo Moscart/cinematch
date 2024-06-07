@@ -22,12 +22,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { DataTableColumnHeader } from "../data-table/data-table-column-header";
 import { IMovie } from "@/lib/type";
 import Link from "next/link";
 import { api } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
+import { DataTableColumnHeader } from "../../data-table/data-table-column-header";
+import TextTruncate from "./read-more";
 
 export function customColumns(
   render: number,
@@ -46,6 +47,10 @@ export function customColumns(
       meta: "Ringkasan",
       header: ({ column }) => {
         return <DataTableColumnHeader column={column} title="Ringkasan" />;
+      },
+      cell: ({ row }) => {
+        const data = row.original;
+        return <div>{TextTruncate({ text: data.overview as string })}</div>;
       },
     },
     {
