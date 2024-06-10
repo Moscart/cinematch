@@ -2,7 +2,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "../globals.css";
-import PageAnimate from "./page-animate";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -18,9 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
-        <PageAnimate>{children}</PageAnimate>
-      </body>
+      <body className={montserrat.className}>{children}</body>
     </html>
   );
 }

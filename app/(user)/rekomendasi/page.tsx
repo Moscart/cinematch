@@ -19,6 +19,7 @@ import "moment/locale/id";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useEffect, useState } from "react";
+import { animatePageOut } from "../animation";
 
 function Rekomendasi() {
   const [data, setData] = useState<Movie[] | []>([]);
@@ -63,12 +64,10 @@ function Rekomendasi() {
             background:
               "linear-gradient(to right, transparent 0%, hsl(var(--primary)) 90%)",
           }}
-          asChild
+          onClick={() => animatePageOut("/", router)}
         >
-          <Link href={"/"} className="flex justify-center items-center">
-            <ChevronLeft className="h-4 w-4 ms-5 me-2" strokeWidth={3} />
-            BACK
-          </Link>
+          <ChevronLeft className="h-4 w-4 ms-5 me-2" strokeWidth={3} />
+          BACK
         </Button>
         <h1 className="text-center mb-24">Rekomendasi</h1>
         <form onSubmit={onSearch} className="max-w-screen-md m-auto">
