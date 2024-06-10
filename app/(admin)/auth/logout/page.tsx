@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/card";
 import { handleSignOut } from "@/lib/serverUtils";
 import { ArrowLeft, LogOut } from "lucide-react";
-import Link from "next/link";
+import { animatePageOut } from "../../animation";
+import { useRouter } from "next/navigation";
 
 const LogoutButton = () => {
   return (
@@ -25,6 +26,7 @@ const LogoutButton = () => {
 };
 
 export default function Logout() {
+  const router = useRouter();
   const jumlahBox = 1000;
 
   const boxes = Array.from({ length: jumlahBox }, (_, index) => ({
@@ -43,12 +45,10 @@ export default function Logout() {
       <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
       <Card className="w-full max-w-sm z-10 border-none rounded-3xl shadow-none drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] relative bg-transparent">
         <Button
-          className="rounded-full h-12 w-12 absolute font-bold text-background hover:bg-primary hover:scale-125 transition-transform ease-in-out duration-500"
-          asChild
+          className="rounded-full h-12 w-12 absolute font-bold text-background hover:bg-primary hover:scale-[115%] transition-transform ease-in-out duration-500"
+          onClick={() => animatePageOut("/admin", router)}
         >
-          <Link href={"/admin"}>
-            <ArrowLeft className="h-8 w-8" strokeWidth={3} />
-          </Link>
+          <ArrowLeft className="h-8 w-8" strokeWidth={3} />
         </Button>
         <div
           className="-z-10 w-full bg-background absolute bottom-0 rounded-3xl"

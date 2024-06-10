@@ -15,6 +15,7 @@ import { Loader2, LogIn } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { animatePageOut } from "../../animation";
 
 export default function FormLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,9 +41,9 @@ export default function FormLogin() {
           } else {
             toast.success("You are now signed in!");
             if (callbackUrl) {
-              router.push(callbackUrl);
+              animatePageOut(callbackUrl, router);
             } else {
-              router.push("/admin");
+              animatePageOut("/admin", router);
             }
           }
         })
