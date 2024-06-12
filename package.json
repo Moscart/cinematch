@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.1.0",
     "@gsap/react": "^2.1.1",
+    "@motionone/utils": "^10.18.0",
     "@prisma/client": "^5.14.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",

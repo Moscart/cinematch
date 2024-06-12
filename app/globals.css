@@ -131,6 +131,28 @@
   .scroll-bar::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
+  .parallax {
+    overflow: hidden;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .parallax .scroller {
+    text-transform: uppercase;
+    font-size: 100px;
+    display: flex;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .parallax span {
+    display: block;
+    margin-right: 30px;
+  }
 }
 .duration-custom {
   transition-duration: 1500ms;
