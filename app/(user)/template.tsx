@@ -8,6 +8,7 @@ export default function Template({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
+    window.scrollTo(0, 0);
     animatePageIn();
   }, []);
   return (

@@ -16,6 +16,7 @@ import { IMovie } from "@/lib/type";
 import { Button } from "@/components/ui/button";
 import { stringLimiter } from "@/lib/utils";
 import { translateToId } from "@/lib/serverUtils";
+import Link from "next/link";
 
 interface INowPlaying {
   data: IMovie[];
@@ -112,8 +113,11 @@ export const NowPlaying: React.FC<INowPlaying> = ({ data }) => {
             <Button
               className="mt-5 max-w-min bg-background/50"
               variant={"outline"}
+              asChild
             >
-              Lihat Detail
+              <Link href={`/detail/${data[npSelected].id}`} target="_blank">
+                Lihat Detail
+              </Link>
             </Button>
           </div>
         </div>

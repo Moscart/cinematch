@@ -4,6 +4,7 @@ import { CardMovie } from "@/components/main/card_movie";
 import { Button } from "@/components/ui/button";
 import { IMovie, IMovieList } from "@/lib/type";
 import { api } from "@/lib/utils";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface IPopular {
@@ -37,13 +38,15 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
       <div className="w-3/4 mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-5 gap-x-5 gap-y-7">
           {dataMovie.map((movie) => (
-            <CardMovie
-              key={movie.id}
-              title={movie.title}
-              posterPath={movie.poster_path}
-              vote={movie.vote_average}
-              releaseDate={movie.release_date}
-            />
+            <Link href={`/detail/${movie.id}`} target="_blank">
+              <CardMovie
+                key={movie.id}
+                title={movie.title}
+                posterPath={movie.poster_path}
+                vote={movie.vote_average}
+                releaseDate={movie.release_date}
+              />
+            </Link>
           ))}
         </div>
         <div className="text-center pt-20">
