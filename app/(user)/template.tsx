@@ -4,42 +4,67 @@ import React, { useEffect } from "react";
 import { animatePageIn } from "./animation";
 import Navbar from "./navbar";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
     animatePageIn();
   }, []);
   return (
     <div>
       <div
-        id="banner-1"
-        className="min-h-screen bg-primary z-40 fixed left-0 top-0 w-1/4"
-      ></div>
-      <div
-        id="banner-2"
-        className="min-h-screen bg-primary z-40 fixed left-1/4 top-0 w-1/4"
-      ></div>
-      <div
-        id="banner-3"
-        className="min-h-screen bg-primary z-40 fixed left-2/4 top-0 w-1/4"
-      ></div>
-      <div
-        id="banner-4"
-        className="min-h-screen bg-primary z-40 fixed left-3/4 top-0 w-1/4"
-      ></div>
-      {/* <div
-        id="white-banner"
-        className="w-screen h-[200vh] top-[100vh] rounded-t-full bg-white mix-blend-difference z-50 fixed"
-      ></div>
-
-      <div
-        id="black-banner"
-        className="w-screen h-[200vh] bottom-[100vh] rounded-b-full bg-black z-50 fixed"
-      ></div> */}
-      <nav className="fixed z-50 grid grid-cols-5 border-t-8 border-primary w-full">
-        <div className="col-span-1 bg-primary rounded-br-3xl flex justify-center items-center font-extrabold text-4xl tracking-wide">
+        id="hidden-background"
+        className="h-screen w-screen bg-background fixed top-0 left-0 z-40"
+      >
+        <div
+          id="banner-1"
+          className="absolute bottom-1/2 right-0 translate-x-1/2"
+        >
+          <div className="inline-block font-extrabold text-8xl text-nowrap leading-normal">
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+          </div>
+        </div>
+        <div id="banner-2" className="absolute top-1/2 -translate-x-1/2">
+          <div className="inline-block font-extrabold text-8xl text-nowrap leading-3">
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+            CINE<div className="inline-block text-primary me-2">MATCH</div>
+          </div>
+        </div>
+      </div>
+      <nav className="sticky top-0 z-50 flex border-t-8 border-primary w-full">
+        <div className="px-12 bg-primary rounded-br-3xl flex justify-center items-center font-extrabold text-4xl tracking-wide">
           CINE<span className="text-background">MATCH</span>
         </div>
-        <div className="col-span-4 p-3 relative">
+        <div className="p-3 relative flex-grow">
           <div className="h-12 w-6 bg-transparent absolute top-0 left-0 rounded-tl-3xl shadow-[0_-25px_0_0_hsl(var(--primary))]"></div>
           <Navbar />
         </div>

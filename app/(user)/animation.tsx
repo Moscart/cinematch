@@ -2,71 +2,84 @@ import gsap from "gsap";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const animatePageIn = () => {
+  const hiddenBackground = document.getElementById("hidden-background");
   const bannerOne = document.getElementById("banner-1");
   const bannerTwo = document.getElementById("banner-2");
-  const bannerThree = document.getElementById("banner-3");
-  const bannerFour = document.getElementById("banner-4");
 
-  if (bannerOne && bannerTwo && bannerThree && bannerFour) {
+  if (hiddenBackground && bannerOne && bannerTwo) {
     const tl = gsap.timeline();
 
-    tl.set([bannerOne, bannerTwo, bannerThree, bannerFour], {
-      yPercent: 0,
-    }).to([bannerOne, bannerTwo, bannerThree, bannerFour], {
-      yPercent: 100,
-      stagger: 0.2,
-    });
+    tl.set([hiddenBackground], {
+      opacity: 1,
+      display: "block",
+    })
+      .to([bannerOne], {
+        xPercent: 50,
+        duration: 2,
+        ease: "power4.in",
+      })
+      .to(
+        [bannerTwo],
+        {
+          xPercent: -100,
+          duration: 2,
+          ease: "power4.in",
+        },
+        "<"
+      )
+      .to([hiddenBackground], {
+        opacity: 0,
+        duration: 1,
+        ease: "power4.in",
+      })
+      .to([hiddenBackground], {
+        display: "none",
+      });
   }
-
-  // const whiteBanner = document.getElementById("white-banner");
-  // const blackBanner = document.getElementById("black-banner");
-
-  // if (whiteBanner && blackBanner) {
-  //   const tl = gsap.timeline();
-
-  //   tl.set([whiteBanner], {
-  //     y: "0vh",
-  //   })
-  //     .set([blackBanner], {
-  //       y: "0vh",
-  //     })
-  //     .to([whiteBanner], {
-  //       y: "-200vh",
-  //       duration: 0.75,
-  //     })
-  //     .to([blackBanner], {
-  //       y: "200vh",
-  //       duration: 0.5,
-  //     })
-  //     .to([whiteBanner], {
-  //       y: "-300vh",
-  //     })
-  //     .to([blackBanner], {
-  //       opacity: 0,
-  //     })
-  //     .to([blackBanner], {
-  //       y: "300vh",
-  //     });
-  // }
 };
 
 export const animatePageOut = (href: string, router: AppRouterInstance) => {
+  const hiddenBackground = document.getElementById("hidden-background");
   const bannerOne = document.getElementById("banner-1");
   const bannerTwo = document.getElementById("banner-2");
-  const bannerThree = document.getElementById("banner-3");
-  const bannerFour = document.getElementById("banner-4");
 
-  if (bannerOne && bannerTwo && bannerThree && bannerFour) {
+  if (hiddenBackground && bannerOne && bannerTwo) {
     const tl = gsap.timeline();
 
-    tl.set([bannerOne, bannerTwo, bannerThree, bannerFour], {
-      yPercent: -100,
-    }).to([bannerOne, bannerTwo, bannerThree, bannerFour], {
-      yPercent: 0,
-      stagger: 0.2,
-      onComplete: () => {
-        router.push(href);
-      },
-    });
+    tl.set([hiddenBackground], {
+      opacity: 0,
+      display: "none",
+    })
+      .set([bannerOne], {
+        xPercent: -100,
+      })
+      .set([bannerTwo], {
+        xPercent: 50,
+      })
+      .to([hiddenBackground], {
+        display: "block",
+      })
+      .to([hiddenBackground], {
+        opacity: 1,
+        duration: 1,
+        ease: "power4.out",
+      })
+      .to([bannerOne], {
+        xPercent: 0,
+        duration: 3,
+        ease: "power4.out",
+      })
+      .to(
+        [bannerTwo],
+        {
+          xPercent: -50,
+          duration: 3,
+          ease: "power4.out",
+          onComplete: () => {
+            router.push(href);
+          },
+        },
+        "<"
+      );
   }
 };
