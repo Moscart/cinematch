@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { animatePageOut } from "./animation";
 
@@ -27,24 +27,24 @@ function NavbarLink({
   href,
   path,
   placeholder,
-}: {
+}: Readonly<{
   href: string;
   path: string;
   placeholder: React.ReactNode;
-}) {
+}>) {
   const router = useRouter();
 
   const spring = {
     type: "spring",
-    stiffness: 700,
-    damping: 30,
+    stiffness: 150,
+    damping: 20,
   };
 
   return (
     <div className="inline-block relative">
       <Button
         className={`bg-transparent shadow-none ${
-          path !== href ? "hover:bg-secondary" : "hover:bg-none"
+          path !== href ? "hover:bg-secondary/50" : "hover:bg-none"
         }`}
         onClick={() => path !== href && animatePageOut(href, router)}
       >
