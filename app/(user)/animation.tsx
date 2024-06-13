@@ -59,11 +59,15 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
       .to([hiddenBackground], {
         display: "block",
       })
-      .to([hiddenBackground], {
-        opacity: 1,
-        duration: 1,
-        ease: "power4.out",
-      })
+      .to(
+        [hiddenBackground],
+        {
+          opacity: 1,
+          duration: 1,
+          ease: "power4.out",
+        },
+        "<"
+      )
       .to([bannerOne], {
         xPercent: 0,
         duration: 3,
