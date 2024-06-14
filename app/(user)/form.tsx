@@ -17,14 +17,17 @@ export default function Form() {
     >
       <div className="flex flex-row gap-2">
         <Input
-          className="bg-background"
+          className="bg-background/50 border-primary"
           type="text"
           name="keywords"
           placeholder="Kata Kunci"
           autoComplete="off"
         />
-        <Button className="text-background font-bold">
-          <Search className="size-4 me-2" strokeWidth={3} /> Cari
+        <Button
+          className="text-primary border-primary bg-background/50"
+          variant={"outline"}
+        >
+          <Search className="size-4 me-2" strokeWidth={2} /> Rekomendasi
         </Button>
       </div>
     </form>

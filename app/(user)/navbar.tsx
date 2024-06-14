@@ -5,20 +5,31 @@ import React from "react";
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { animatePageOut } from "./animation";
+import Form from "./form";
 
 export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex gap-2 bg-background/50 backdrop-blur p-3 rounded-2xl">
-      <NavbarLink href="/" path={pathname} placeholder="Home" />
-      <NavbarLink
-        href="/now-playing"
-        path={pathname}
-        placeholder="Now Playing"
-      />
-      <NavbarLink href="/populer" path={pathname} placeholder="Populer" />
-      <NavbarLink href="/upcoming" path={pathname} placeholder="Upcoming" />
+    <div className="flex justify-between bg-background/50 backdrop-blur p-3 rounded-2xl">
+      <div className="flex gap-2">
+        <NavbarLink href="/" path={pathname} placeholder="Home" />
+        <NavbarLink
+          href="/rekomendasi"
+          path={pathname}
+          placeholder="Rekomendasi"
+        />
+        <NavbarLink
+          href="/now-playing"
+          path={pathname}
+          placeholder="Now Playing"
+        />
+        <NavbarLink href="/populer" path={pathname} placeholder="Populer" />
+        <NavbarLink href="/upcoming" path={pathname} placeholder="Upcoming" />
+      </div>
+      <div className="">
+        <Form />
+      </div>
     </div>
   );
 }
