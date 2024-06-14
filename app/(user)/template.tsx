@@ -62,7 +62,7 @@ export default function Template({
         </div>
       </div>
       <nav className="sticky top-0 z-50 flex border-t-8 border-primary w-full">
-        <div className="px-12 bg-primary rounded-br-3xl flex justify-center items-center font-extrabold text-4xl tracking-wide">
+        <div className="px-12 bg-primary rounded-br-3xl flex justify-center items-center font-[1000] text-4xl tracking-wide">
           CINE<span className="text-background">MATCH</span>
         </div>
         <div className="p-3 relative flex-grow">
