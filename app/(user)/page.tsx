@@ -3,7 +3,7 @@ import { Popular } from "./components/popular";
 import { Upcoming } from "./components/upcoming";
 import { api } from "@/lib/utils";
 import { IMovie, IMovieList } from "@/lib/type";
-import Background from "@/components/main/background";
+import Background from "@/app/(user)/components/background";
 import Parallax from "./components/parallax";
 async function getNowPlaying() {
   let currentPage = 1;
