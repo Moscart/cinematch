@@ -17,7 +17,7 @@ export default function LoginForm() {
           ></div>
         ))}
       </div>
-      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
+      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 scrolling"></div>
       <Suspense>
         <FormLogin />
       </Suspense>

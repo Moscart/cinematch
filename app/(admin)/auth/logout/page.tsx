@@ -42,7 +42,7 @@ export default function Logout() {
           ></div>
         ))}
       </div>
-      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 test"></div>
+      <div className="absolute top-0 bg-gradient-to-b from-transparent via-primary to-transparent w-full h-full -z-20 scrolling"></div>
       <Card className="w-full max-w-sm z-10 border-none rounded-3xl shadow-none drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] relative bg-transparent">
         <Button
           className="rounded-full h-12 w-12 absolute font-bold text-background hover:bg-primary hover:scale-[115%] transition-transform ease-in-out duration-500"

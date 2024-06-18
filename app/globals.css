@@ -62,7 +62,7 @@
 
 @layer components {
   /* Login Animation */
-  .test {
+  .scrolling {
     animation: scrollingAnimation 3s linear infinite;
   }
 
