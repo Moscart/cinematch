@@ -54,7 +54,7 @@ function NavbarLink({
   return (
     <div className="inline-block relative">
       <Button
-        className={`bg-transparent shadow-none ${
+        className={`bg-transparent shadow-none font-semibold tracking-wide transition-all duration-500 ${
           path !== href ? "hover:bg-secondary/50" : "hover:bg-none"
         }`}
         onClick={() => path !== href && animatePageOut(href, router)}
