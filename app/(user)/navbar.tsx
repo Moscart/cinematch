@@ -24,7 +24,7 @@ export default function Navbar() {
           path={pathname}
           placeholder="Now Playing"
         />
-        <NavbarLink href="/populer" path={pathname} placeholder="Populer" />
+        <NavbarLink href="/popular" path={pathname} placeholder="Popular" />
         <NavbarLink href="/upcoming" path={pathname} placeholder="Upcoming" />
       </div>
       <div className="">

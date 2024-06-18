@@ -5,23 +5,29 @@ import { Button } from "@/components/ui/button";
 import { IMovie, IMovieList } from "@/lib/type";
 import { api } from "@/lib/utils";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-interface IPopular {
-  data: IMovie[];
-}
-
-export const Popular: React.FC<IPopular> = ({ data }) => {
-  const [dataMovie, setDataMovie] = useState<IMovie[]>(data);
+export default function PopularPage() {
+  const [data, setData] = useState<IMovie[]>([]);
   const [page, setPage] = useState<number>(1);
 
+  useEffect(() => {
+    getMovie();
+  }, []);
+
+  const getMovie = async () => {
+    const { results: movies }: IMovieList = await api.fetch(`/api/popular/1`, {
+      withoutAuth: true,
+    });
+    setData(movies);
+  };
   const handleLoadMore = async () => {
     const { results: movies }: IMovieList = await api.fetch(
       `/api/popular/${page + 1}`,
       { withoutAuth: true }
     );
 
-    setDataMovie((prevData) => [...prevData, ...movies]);
+    setData((prevData) => [...prevData, ...movies]);
     setPage((prevPage) => prevPage + 1);
   };
 
@@ -37,7 +43,7 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
       </h1>
       <div className="w-3/4 mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-5 gap-x-5 gap-y-7">
-          {dataMovie.map((movie) => (
+          {data.map((movie) => (
             <Link href={`/detail/${movie.id}`} target="_blank" key={movie.id}>
               <CardMovie
                 title={movie.title}
@@ -59,4 +65,4 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
       </div>
     </div>
   );
-};
+}
