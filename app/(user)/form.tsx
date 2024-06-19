@@ -3,16 +3,24 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { animatePageOut } from "./animation";
 
 export default function Form() {
   const router = useRouter();
+  const pathname = usePathname();
   return (
     <form
       action={(data) => {
-        animatePageOut(`/rekomendasi?keywords=${data.get("keywords")}`, router);
+        if (pathname !== "/rekomendasi") {
+          animatePageOut(
+            `/rekomendasi?keywords=${data.get("keywords")}`,
+            router
+          );
+        } else {
+          router.push(`/rekomendasi?keywords=${data.get("keywords")}`);
+        }
       }}
     >
       <div className="flex flex-row gap-2">
