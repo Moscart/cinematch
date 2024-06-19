@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import SmoothScrolling from "./smooth-scrolling";
 import { cn } from "@/lib/utils";
+import CustomCursor from "./custom-cursor";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("min-h-screen", montserrat.className)}>
         <SmoothScrolling>{children}</SmoothScrolling>
+        <CustomCursor />
       </body>
     </html>
   );
