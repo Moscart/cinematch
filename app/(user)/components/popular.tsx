@@ -2,29 +2,19 @@
 
 import { CardMovie } from "@/components/main/card_movie";
 import { Button } from "@/components/ui/button";
-import { IMovie, IMovieList } from "@/lib/type";
-import { api } from "@/lib/utils";
+import { IMovie } from "@/lib/type";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { animatePageOut } from "../animation";
+import { ChevronRightCircle } from "lucide-react";
 
 interface IPopular {
   data: IMovie[];
 }
 
 export const Popular: React.FC<IPopular> = ({ data }) => {
-  const [dataMovie, setDataMovie] = useState<IMovie[]>(data);
-  const [page, setPage] = useState<number>(1);
-
-  const handleLoadMore = async () => {
-    const { results: movies }: IMovieList = await api.fetch(
-      `/api/popular/${page + 1}`,
-      { withoutAuth: true }
-    );
-
-    setDataMovie((prevData) => [...prevData, ...movies]);
-    setPage((prevPage) => prevPage + 1);
-  };
-
+  const router = useRouter();
   return (
     <div className="p-24 bg-gradient-to-t from-primary/80 to-transparent">
       <h1
@@ -37,7 +27,7 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
       </h1>
       <div className="w-3/4 mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-5 gap-x-5 gap-y-7">
-          {dataMovie.map((movie) => (
+          {data.map((movie) => (
             <Link href={`/detail/${movie.id}`} target="_blank" key={movie.id}>
               <CardMovie
                 title={movie.title}
@@ -50,10 +40,11 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
         </div>
         <div className="text-center pt-20">
           <Button
-            className="bg-background hover:bg-primary transition-colors duration-500"
-            onClick={handleLoadMore}
+            className="bg-background hover:bg-primary transition-colors duration-500 font-bold rounded-full"
+            onClick={() => animatePageOut("/popular", router)}
           >
-            Load More
+            See More
+            <ChevronRightCircle className="size-4 ms-2" strokeWidth={3} />
           </Button>
         </div>
       </div>
