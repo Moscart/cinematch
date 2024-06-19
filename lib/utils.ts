@@ -28,6 +28,7 @@ export const api = {
               Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
             }),
       },
+      next: { revalidate: 3600 },
       ...options,
     };
 
