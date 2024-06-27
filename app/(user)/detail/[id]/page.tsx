@@ -14,6 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GENRE_MOVIE } from "@/lib/constant";
+import { translateToId } from "@/lib/serverUtils";
 import { Cast, CrewDouble, Genre, MovieDetail } from "@/lib/type";
 import { api, formatTime } from "@/lib/utils";
 import { Play } from "lucide-react";
@@ -35,7 +36,15 @@ export default function Detail({
     const detail: MovieDetail = await api.fetch(
       `/api/movie/detail/${params.id}`
     );
-    setData(detail);
+    translateToId([detail.overview, detail.tagline]).then((res) => {
+      const dataTranslate = JSON.parse(res);
+      const newData = {
+        ...detail,
+        overview: dataTranslate[0].text,
+        tagline: dataTranslate[1].text,
+      };
+      setData(newData);
+    });
   };
 
   const getProfile = (crew: Cast[]) => {
@@ -95,24 +104,30 @@ export default function Detail({
               </div>
               <Card className="basis-[75%] p-5 flex gap-5 flex-col">
                 <div className="">
-                  <div className="flex text-2xl gap-2">
-                    <p className="font-bold">{data.original_title}</p>
-                    <p className="text-muted-foreground">
+                  <div className="text-2xl">
+                    <span className="font-bold me-2">
+                      {data.original_title}
+                    </span>
+                    <span className="text-muted-foreground">
                       ({moment(data.release_date).format("YYYY")})
-                    </p>
+                    </span>
                   </div>
                   <p className="font-light text-sm">{data.title}</p>
                 </div>
                 <div className="font-light text-sm flex gap-2">
-                  <p>{moment(data.release_date).format("D/M/Y")}</p>
+                  <p>{moment(data.release_date).format("DD/MM/Y")}</p>
                   <p>&#x22C5;</p>
-                  <p className="">
-                    {data.genres
-                      .map((genre: Genre) => {
-                        return GENRE_MOVIE[genre.id];
-                      })
-                      .join(", ")}
-                  </p>
+                  {data.genres.length ? (
+                    <p className="">
+                      {data.genres
+                        .map((genre: Genre) => {
+                          return GENRE_MOVIE[genre.id];
+                        })
+                        .join(", ")}
+                    </p>
+                  ) : (
+                    <p>Tidak Ada Genre</p>
+                  )}
                   <p>&#x22C5;</p>
                   <div className="">{formatTime(data.runtime)}</div>
                 </div>
@@ -123,12 +138,18 @@ export default function Detail({
                     <p>Pengguna</p>
                   </div>
                 </div>
-                <p className="font-medium text-sm italic text-muted-foreground">
-                  {data.tagline}
-                </p>
+                {data.tagline !== "" && (
+                  <p className="font-medium text-sm italic text-muted-foreground">
+                    {data.tagline}
+                  </p>
+                )}
                 <div className="flex flex-col gap-2">
                   <p className="font-bold text-lg">Ringkasan</p>
-                  <p className="font-light text-sm">{data.overview}</p>
+                  <p className="font-light text-sm">
+                    {data.overview === ""
+                      ? "Tidak ada ringkasan"
+                      : data.overview}
+                  </p>
                 </div>
                 <div className="grid grid-cols-3 gap-5">
                   {getProfile(data.credits.crew).map((crew) => (
@@ -149,13 +170,17 @@ export default function Detail({
             <Separator orientation="vertical" />
             <div className="text-sm grid gap-1">
               <p className="font-semibold">Bahasa Ucapan</p>
-              <p>
-                {data.spoken_languages
-                  .map((spoken) => {
-                    return spoken.english_name;
-                  })
-                  .join(", ")}
-              </p>
+              {data.spoken_languages.length ? (
+                <p>
+                  {data.spoken_languages
+                    .map((spoken) => {
+                      return spoken.english_name;
+                    })
+                    .join(", ")}
+                </p>
+              ) : (
+                <p className="text-center">-</p>
+              )}
             </div>
             <Separator orientation="vertical" />
             <div className="text-sm grid gap-1">
@@ -171,26 +196,34 @@ export default function Detail({
           <Separator className="my-12" />
           <div className="mt-12">
             <h4>Pemeran Unggulan</h4>
-            <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
-              {data.credits?.cast.slice(0, 10).map((castMember) => (
-                <div className="" key={castMember.id}>
-                  <CardImage
-                    className="w-40"
-                    posterPath={castMember.profile_path}
-                    alt="asdf"
-                  />
-                  <div className="grid gap-1 mt-3">
-                    <p className="text-sm font-bold">
-                      {castMember.original_name}
-                    </p>
-                    <p className="text-xs font-light">{castMember.character}</p>
-                  </div>
+            {data.credits.cast.length ? (
+              <>
+                <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
+                  {data.credits?.cast.slice(0, 10).map((castMember) => (
+                    <div className="" key={castMember.id}>
+                      <CardImage
+                        className="w-40"
+                        posterPath={castMember.profile_path}
+                        alt="asdf"
+                      />
+                      <div className="grid gap-1 mt-3">
+                        <p className="text-sm font-bold">
+                          {castMember.original_name}
+                        </p>
+                        <p className="text-xs font-light">
+                          {castMember.character}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <Button className="mt-5" variant={"outline"}>
-              Kru dan Aktor Lainnya
-            </Button>
+                <Button className="mt-5" variant={"outline"}>
+                  Kru dan Aktor Lainnya
+                </Button>
+              </>
+            ) : (
+              <p className="mt-5">Tidak ada pemeran unggulan</p>
+            )}
           </div>
           <Separator className="my-12" />
           <div className="mb-24">
@@ -203,79 +236,91 @@ export default function Detail({
                   <TabsTrigger value="poster">Poster</TabsTrigger>
                 </TabsList>
                 <TabsContent value="video" className="w-full">
-                  <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
-                    {data.videos?.results.map((video) => (
-                      <Dialog key={video.id}>
-                        <DialogTrigger>
-                          <Card className="overflow-hidden relative border-none w-max">
-                            <Image
-                              className="aspect-video object-cover"
-                              alt={video.name}
-                              src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
-                              width={500}
-                              height={500}
-                              onDragStart={(e) => e.preventDefault()}
-                              priority
-                            />
-                            <div className="bg-background/70 absolute flex items-center justify-center z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-full">
-                              <Play
-                                fill="white"
-                                strokeWidth={0}
-                                className="size-8 ms-1 my-0.5"
+                  {data.videos.results.length ? (
+                    <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
+                      {data.videos?.results.map((video) => (
+                        <Dialog key={video.id}>
+                          <DialogTrigger>
+                            <Card className="overflow-hidden relative border-none w-max">
+                              <Image
+                                className="aspect-video object-cover"
+                                alt={video.name}
+                                src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
+                                width={500}
+                                height={500}
+                                onDragStart={(e) => e.preventDefault()}
+                                priority
                               />
-                            </div>
-                          </Card>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-screen-xl">
-                          <DialogHeader>
-                            <DialogTitle>{video.name}</DialogTitle>
-                          </DialogHeader>
-                          <iframe
-                            className="rounded-lg w-full aspect-video"
-                            src={`https://www.youtube.com/embed/${video.key}`}
-                            title={video.name}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          ></iframe>
-                        </DialogContent>
-                      </Dialog>
-                    ))}
-                  </div>
+                              <div className="bg-background/70 absolute flex items-center justify-center z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-full">
+                                <Play
+                                  fill="white"
+                                  strokeWidth={0}
+                                  className="size-8 ms-1 my-0.5"
+                                />
+                              </div>
+                            </Card>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-screen-xl">
+                            <DialogHeader>
+                              <DialogTitle>{video.name}</DialogTitle>
+                            </DialogHeader>
+                            <iframe
+                              className="rounded-lg w-full aspect-video"
+                              src={`https://www.youtube.com/embed/${video.key}`}
+                              title={video.name}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            ></iframe>
+                          </DialogContent>
+                        </Dialog>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-5">Tidak ada video</p>
+                  )}
                 </TabsContent>
                 <TabsContent value="gambar">
-                  <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
-                    {data.images?.backdrops.map((backdrop) => (
-                      <Link
-                        href={`https://image.tmdb.org/t/p/original${backdrop.file_path}`}
-                        target="_blank"
-                        key={backdrop.file_path}
-                      >
-                        <CardImage
-                          className="w-max"
-                          posterPath={backdrop.file_path}
-                          alt={backdrop.file_path}
-                          video
-                        />
-                      </Link>
-                    ))}
-                  </div>
+                  {data.images.backdrops.length ? (
+                    <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
+                      {data.images?.backdrops.map((backdrop) => (
+                        <Link
+                          href={`https://image.tmdb.org/t/p/original${backdrop.file_path}`}
+                          target="_blank"
+                          key={backdrop.file_path}
+                        >
+                          <CardImage
+                            className="w-max"
+                            posterPath={backdrop.file_path}
+                            alt={backdrop.file_path}
+                            video
+                          />
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-5">Tidak ada gambar</p>
+                  )}
                 </TabsContent>
                 <TabsContent value="poster">
-                  <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
-                    {data.images?.posters.map((backdrop) => (
-                      <Link
-                        href={`https://image.tmdb.org/t/p/original${backdrop.file_path}`}
-                        target="_blank"
-                        key={backdrop.file_path}
-                      >
-                        <CardImage
-                          className="w-[187px]"
-                          posterPath={backdrop.file_path}
-                          alt={backdrop.file_path}
-                        />
-                      </Link>
-                    ))}
-                  </div>
+                  {data.images.posters.length ? (
+                    <div className="py-5 overflow-x-auto grid grid-flow-col w-min max-w-full gap-5 scroll-bar">
+                      {data.images?.posters.map((backdrop) => (
+                        <Link
+                          href={`https://image.tmdb.org/t/p/original${backdrop.file_path}`}
+                          target="_blank"
+                          key={backdrop.file_path}
+                        >
+                          <CardImage
+                            className="w-[187px]"
+                            posterPath={backdrop.file_path}
+                            alt={backdrop.file_path}
+                          />
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-5">Tidak ada poster</p>
+                  )}
                 </TabsContent>
               </Tabs>
             </div>
