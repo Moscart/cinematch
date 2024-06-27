@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import SmoothScrolling from "./smooth-scrolling";
 import { cn } from "@/lib/utils";
-import CustomCursor from "./custom-cursor";
+import CustomCursor from "../../components/main/custom-cursor";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 

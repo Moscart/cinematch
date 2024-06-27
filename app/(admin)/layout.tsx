@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import CustomCursor from "../../components/main/custom-cursor";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
         {children}
         <Toaster richColors position="bottom-right" />
+        <CustomCursor />
       </body>
     </html>
   );
