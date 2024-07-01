@@ -27,6 +27,7 @@ export default function Background() {
             filter:
               "hue-rotate(325deg) brightness(195%) sepia(0.14) saturate(110%)",
           }}
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
       <div className="col-span-4 row-span-3 col-start-5 row-start-2 bg-primary rounded-3xl overflow-hidden">
@@ -74,6 +75,7 @@ export default function Background() {
             filter:
               "hue-rotate(35deg) brightness(150%) sepia(0.14) saturate(110%)",
           }}
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
       <Image
