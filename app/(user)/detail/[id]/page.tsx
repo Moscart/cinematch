@@ -91,7 +91,7 @@ export default function Detail({
   };
 
   return (
-    <main className="min-h-screen">
+    <main>
       {data && (
         <div className="max-w-screen-xl mx-auto">
           <div className="pt-24">

@@ -63,7 +63,7 @@ export default async function Home() {
   const dataPopular = await getPopular();
   const dataUpcoming = await getUpcoming();
   return (
-    <main className="min-h-screen">
+    <main>
       <Background />
       <Parallax />
       <NowPlaying data={dataNowPlaying} />

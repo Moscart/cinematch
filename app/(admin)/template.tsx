@@ -3,7 +3,9 @@
 import React, { useEffect } from "react";
 import { animatePageIn } from "./animation";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
     animatePageIn();
   }, []);
