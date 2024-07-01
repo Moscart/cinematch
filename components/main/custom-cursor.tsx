@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { useFollowPointer } from "../../app/(user)/use-follow-pointer";
 import { motion } from "framer-motion";
+import { useFollowPointer } from "@/lib/use-follow-pointer";
 
 export default function CustomCursor() {
   const { xPoint, yPoint } = useFollowPointer(4);
