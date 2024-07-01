@@ -22,11 +22,14 @@ import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { animatePageOut } from "../../animation";
+import { useRouter } from "next/navigation";
 
 export default function Detail({
   params,
 }: Readonly<{ params: { id: string } }>) {
   const [data, setData] = useState<MovieDetail | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     getDetailMovie();
@@ -204,7 +207,8 @@ export default function Detail({
                       <CardImage
                         className="w-40"
                         posterPath={castMember.profile_path}
-                        alt="asdf"
+                        alt={castMember.original_name}
+                        defaultImage="/no_image.png"
                       />
                       <div className="grid gap-1 mt-3">
                         <p className="text-sm font-bold">
@@ -217,7 +221,11 @@ export default function Detail({
                     </div>
                   ))}
                 </div>
-                <Button className="mt-5" variant={"outline"}>
+                <Button
+                  className="mt-5"
+                  variant={"outline"}
+                  onClick={() => animatePageOut(`/aktor/${params.id}`, router)}
+                >
                   Kru dan Aktor Lainnya
                 </Button>
               </>
