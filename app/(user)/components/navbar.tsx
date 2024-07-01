@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
-import { animatePageOut } from "./animation";
-import Form from "./form";
+import { animatePageOut } from "../animation";
+import Form from "../form";
 
 export default function Navbar() {
   const pathname = usePathname();

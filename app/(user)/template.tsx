@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { animatePageIn } from "./animation";
-import Navbar from "./navbar";
+import Navbar from "./components/navbar";
 
 export default function Template({
   children,
