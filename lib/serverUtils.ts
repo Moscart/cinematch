@@ -120,7 +120,7 @@ export async function recommendation(keywords: string) {
   const filteredArray = pairedArray.filter(([similarity]) => similarity !== 0);
   const top10Array = filteredArray.slice(0, 10);
 
-  const top10Similarity = top10Array.map(([similarity]) => similarity);
+  // const top10Similarity = top10Array.map(([similarity]) => similarity);
   const top10Movies = top10Array.map(([, movie]) => movie);
 
   return JSON.stringify(top10Movies);

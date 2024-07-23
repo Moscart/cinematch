@@ -36,7 +36,7 @@ export default async function Sample({
   const filterWords = Array.from(new Set(flatWords));
 
   //Frekuensi Keywords
-  const queryFrequency = filterKeywords.map((word) => {
+  const queryFrequency = filterWords.map((word) => {
     const keywordsLength = filterKeywords.length;
     const totalWords = filterKeywords.filter(
       (keyword) => keyword === word
@@ -48,7 +48,7 @@ export default async function Sample({
   //Frekuensi Kata Pada Film
   const dataFrequency = data.map((movie) => {
     const words = movie.words.split(", ");
-    const wordsFrequency = filterKeywords.map((word) => {
+    const wordsFrequency = filterWords.map((word) => {
       const wordsLength = words.length;
       const totalWords = words.filter((wordMovie) => word === wordMovie).length;
       const frequency = totalWords / wordsLength;
@@ -58,10 +58,13 @@ export default async function Sample({
   });
 
   //Dokumen Frekuensi
-  const totalFrequency = [queryFrequency, ...dataFrequency];
+  const totalFrequency = [...dataFrequency];
   const maxLength = Math.max(...totalFrequency.map((arr) => arr.length));
-  const documentFrequency = Array.from({ length: maxLength }, (_, i) =>
-    totalFrequency.reduce((count, arr) => count + (arr[i] !== 0 ? 1 : 0), 0)
+  const documentFrequency = Array.from(
+    { length: maxLength },
+    (_, i) =>
+      totalFrequency.reduce((count, arr) => count + (arr[i] !== 0 ? 1 : 0), 0) +
+      1
   );
 
   //Invers Dokumen Frekuensi
@@ -129,191 +132,6 @@ export default async function Sample({
 
   return (
     <main className="min-h-screen">
-      <div className="p-24">
-        <h1 className="text-center mb-8">Frekuensi</h1>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Kata</TableHead>
-              <TableHead className="min-w-[100px]">Query</TableHead>
-              {data.map((movie, index) => {
-                return (
-                  <TableHead className="min-w-[100px]" key={movie.id}>{`Film ${
-                    index + 1
-                  }`}</TableHead>
-                );
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterKeywords.map((word, index) => (
-              <TableRow key={word}>
-                <TableCell className="font-medium">{word}</TableCell>
-                <TableCell>{queryFrequency[index]}</TableCell>
-                {data.map((movie, indexData) => {
-                  return (
-                    <TableCell key={movie.id}>
-                      {dataFrequency[indexData][index]}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="p-24">
-        <h1 className="text-center mb-8">
-          Dokumen Frekuensi dan Invers Dokumen Frekuensi
-        </h1>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Kata</TableHead>
-              <TableHead>Dokumen Frekuensi</TableHead>
-              <TableHead>Invers Dokumen Frekuensi</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterKeywords.map((word, index) => (
-              <TableRow key={word}>
-                <TableCell className="font-medium">{word}</TableCell>
-                <TableCell>{documentFrequency[index]}</TableCell>
-                <TableCell>{inverseDocumentFrequency[index]}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="p-24">
-        <h1 className="text-center mb-8">Bobot TF-IDF</h1>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Kata</TableHead>
-              <TableHead className="min-w-[100px]">Query</TableHead>
-              {data.map((movie, index) => {
-                return (
-                  <TableHead className="min-w-[100px]" key={movie.id}>{`Film ${
-                    index + 1
-                  }`}</TableHead>
-                );
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterKeywords.map((word, index) => (
-              <TableRow key={word}>
-                <TableCell className="font-medium">{word}</TableCell>
-                <TableCell>{bobotQuery[index]}</TableCell>
-                {data.map((movie, indexData) => {
-                  return (
-                    <TableCell key={movie.id}>
-                      {bobotData[indexData][index]}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="p-24">
-        <h1 className="text-center mb-8">Bobot Query * Bobot Dokumen</h1>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Kata</TableHead>
-              {data.map((movie, index) => {
-                return (
-                  <TableHead className="min-w-[100px]" key={movie.id}>{`Film ${
-                    index + 1
-                  }`}</TableHead>
-                );
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterKeywords.map((word, index) => (
-              <TableRow key={word}>
-                <TableCell className="font-medium">{word}</TableCell>
-                {data.map((movie, indexData) => {
-                  return (
-                    <TableCell key={movie.id}>
-                      {bobotQueryDocument[indexData][index]}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell>Total</TableCell>
-              {data.map((movie, index) => {
-                return (
-                  <TableCell key={movie.id}>
-                    {totalBobotQueryDocument[index]}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
-      <div className="p-24">
-        <h1 className="text-center mb-8">Panjang Vektor</h1>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Kata</TableHead>
-              <TableHead className="min-w-[100px]">Query</TableHead>
-              {data.map((movie, index) => {
-                return (
-                  <TableHead className="min-w-[100px]" key={movie.id}>{`Film ${
-                    index + 1
-                  }`}</TableHead>
-                );
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterKeywords.map((word, index) => (
-              <TableRow key={word}>
-                <TableCell className="font-medium">{word}</TableCell>
-                <TableCell>{vectorQuery[index]}</TableCell>
-                {data.map((movie, indexData) => {
-                  return (
-                    <TableCell key={movie.id}>
-                      {vectorData[indexData][index]}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell>Total</TableCell>
-              <TableCell>{totalVectorQuery}</TableCell>
-              {data.map((movie, index) => {
-                return (
-                  <TableCell key={movie.id}>{totalVectorData[index]}</TableCell>
-                );
-              })}
-            </TableRow>
-            <TableRow>
-              <TableCell>Akar</TableCell>
-              <TableCell>{akarVectorQuery}</TableCell>
-              {data.map((movie, index) => {
-                return (
-                  <TableCell key={movie.id}>{akarVectorData[index]}</TableCell>
-                );
-              })}
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
       <div className="p-24">
         <h1 className="text-center mb-8">Cosine Similarity</h1>
         <Table>

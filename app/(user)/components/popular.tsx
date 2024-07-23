@@ -23,7 +23,7 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
           textShadow: "0 0 15px hsl(var(--primary))",
         }}
       >
-        Popular
+        Populer
       </h1>
       <div className="w-3/4 mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-5 gap-x-5 gap-y-7">
@@ -43,7 +43,7 @@ export const Popular: React.FC<IPopular> = ({ data }) => {
             className="bg-background hover:bg-primary transition-colors duration-500 font-bold rounded-full"
             onClick={() => animatePageOut("/popular", router)}
           >
-            See More
+            Selengkapnya
             <ChevronRightCircle className="size-4 ms-2" strokeWidth={3} />
           </Button>
         </div>

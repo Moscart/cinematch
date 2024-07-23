@@ -66,7 +66,7 @@ export default function Tambah() {
         />
         <Button className="col-span-1 font-bold text-background">
           <Search className="size-4 me-2" strokeWidth={3} />
-          Search
+          Cari
         </Button>
       </form>
       <div className="mt-5">

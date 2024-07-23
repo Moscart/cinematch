@@ -50,7 +50,7 @@ export default function PopularPage() {
           textShadow: "0 0 15px hsl(var(--primary))",
         }}
       >
-        Popular
+        Populer
       </h1>
       <div className="w-3/4 mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-5 gap-x-5 gap-y-7">
@@ -87,7 +87,7 @@ export default function PopularPage() {
               {isLoading && (
                 <Loader className="size-4 me-2 animate-spin" strokeWidth={3} />
               )}
-              Load More
+              Tampilkan Lebih
             </Button>
           )}
         </div>

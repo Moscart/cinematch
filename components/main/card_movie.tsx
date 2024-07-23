@@ -63,7 +63,7 @@ export const CardMovie: React.FC<ICardMovie> = ({
           >
             <p className="text-sm font-bold transition-all">{title}</p>
             <p className="text-xs font-extralight">
-              {moment(releaseDate).locale("es").format("MMMM D, YYYY")}
+              {moment(releaseDate).locale("id").format("MMMM D, YYYY")}
             </p>
           </div>
           <div

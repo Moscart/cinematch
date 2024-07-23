@@ -28,7 +28,7 @@ async function getNowPlaying() {
 async function getPopular() {
   const data: IMovie[] = [];
 
-  const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1region=ID`;
+  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.gte=2022-01-01&primary_release_date.lte=2023-12-31&sort_by=popularity.desc&with_origin_country=ID&without_companies=198702%2C215214`;
   const { results: movies }: IMovieList = await api.fetch(url);
 
   movies.map((movie) => {
@@ -66,9 +66,9 @@ export default async function Home() {
     <main>
       <Background />
       <Parallax />
-      <NowPlaying data={dataNowPlaying} />
+      {/* <NowPlaying data={dataNowPlaying} /> */}
       <Popular data={dataPopular} />
-      <Upcoming data={dataUpcoming} />
+      {/* <Upcoming data={dataUpcoming} /> */}
     </main>
   );
 }

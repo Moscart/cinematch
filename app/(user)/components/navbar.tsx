@@ -13,19 +13,19 @@ export default function Navbar() {
   return (
     <div className="flex justify-between bg-background/50 backdrop-blur p-3 rounded-2xl">
       <div className="flex gap-2">
-        <NavbarLink href="/" path={pathname} placeholder="Home" />
+        <NavbarLink href="/" path={pathname} placeholder="Beranda" />
         <NavbarLink
           href="/rekomendasi"
           path={pathname}
           placeholder="Rekomendasi"
         />
-        <NavbarLink
+        {/* <NavbarLink
           href="/now-playing"
           path={pathname}
           placeholder="Now Playing"
-        />
-        <NavbarLink href="/popular" path={pathname} placeholder="Popular" />
-        <NavbarLink href="/upcoming" path={pathname} placeholder="Upcoming" />
+        /> */}
+        <NavbarLink href="/popular" path={pathname} placeholder="Populer" />
+        {/* <NavbarLink href="/upcoming" path={pathname} placeholder="Upcoming" /> */}
       </div>
       <div className="">
         <Form />

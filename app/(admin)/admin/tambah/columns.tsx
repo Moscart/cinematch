@@ -22,7 +22,7 @@ export function customColumns(setIsLoading: Dispatch<SetStateAction<boolean>>) {
   const columns: ColumnDef<IMovie>[] = [
     {
       accessorKey: "original_title",
-      meta: "Judul",
+      meta: "Judul Asli",
       header: ({ column }) => {
         return <DataTableColumnHeader column={column} title="Judul Asli" />;
       },
