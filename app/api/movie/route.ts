@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
-import { IMovieList } from "@/lib/type";
-import { api, textPreprocessing } from "@/lib/utils";
-import { translateToId } from "@/lib/serverUtils";
-import { GENRE_MOVIE } from "@/lib/constant";
 
 export async function GET() {
   const posts = await prisma.movie.findMany();
