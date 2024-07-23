@@ -9,46 +9,47 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_NON_POOLING") // uses a direct connection
 }
 
 model Movie {
-  adult Boolean
-  backdrop_path String? 
-  id Int @id
-  genre_ids String
+  adult             Boolean
+  backdrop_path     String?
+  id                Int      @id
+  genre_ids         String
   original_language String
-  original_title String
-  overview String? @db.Text
-  popularity Decimal? @db.Decimal(10, 3)
-  poster_path String?
-  release_date String
-  title String
-  video Boolean
-  vote_average Decimal? @db.Decimal(10, 3)
-  vote_count Int
-  genre String
-  words String @db.Text
+  original_title    String
+  overview          String?  @db.Text
+  popularity        Decimal? @db.Decimal(10, 3)
+  poster_path       String?
+  release_date      String
+  title             String
+  video             Boolean
+  vote_average      Decimal? @db.Decimal(10, 3)
+  vote_count        Int
+  genre             String
+  words             String   @db.Text
 }
 
 model Sample {
-  adult Boolean
-  backdrop_path String? 
-  id Int @id
-  genre_ids String
+  adult             Boolean
+  backdrop_path     String?
+  id                Int      @id
+  genre_ids         String
   original_language String
-  original_title String
-  overview String? @db.Text
-  popularity Decimal? @db.Decimal(10, 3)
-  poster_path String?
-  release_date String
-  title String
-  video Boolean
-  vote_average Decimal? @db.Decimal(10, 3)
-  vote_count Int
-  genre String
-  words String @db.Text
+  original_title    String
+  overview          String?  @db.Text
+  popularity        Decimal? @db.Decimal(10, 3)
+  poster_path       String?
+  release_date      String
+  title             String
+  video             Boolean
+  vote_average      Decimal? @db.Decimal(10, 3)
+  vote_count        Int
+  genre             String
+  words             String   @db.Text
 }
 
 // model Admin {
@@ -59,13 +60,12 @@ model Sample {
 // }
 
 model Admin {
-  id            String          @id @default(cuid())
-  name          String?
-  username      String         @unique
-  email         String         @unique
-  password      String
- 
+  id       String  @id @default(cuid())
+  name     String?
+  username String  @unique
+  email    String  @unique
+  password String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
