@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import SmoothScrolling from "./smooth-scrolling";
 import CustomCursor from "../../components/main/custom-cursor";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <SmoothScrolling>{children}</SmoothScrolling>
         <CustomCursor />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import CustomCursor from "../../components/main/custom-cursor";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         {children}
         <Toaster richColors position="bottom-right" />
         <CustomCursor />
+        <SpeedInsights />
       </body>
     </html>
   );
