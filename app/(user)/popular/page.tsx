@@ -69,7 +69,7 @@ export default function PopularPage() {
             >
               <Link href={`/detail/${movie.id}`} target="_blank" key={movie.id}>
                 <CardMovie
-                  title={movie.title}
+                  title={movie.original_title}
                   posterPath={movie.poster_path}
                   vote={movie.vote_average}
                   releaseDate={movie.release_date}
