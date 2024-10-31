@@ -10,7 +10,7 @@
     "migrate:mysql": "dotenv -e .env.local -- npx prisma migrate dev"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^2.1.0",
+    "@auth/prisma-adapter": "^2.7.2",
     "@gsap/react": "^2.1.1",
     "@motionone/utils": "^10.18.0",
     "@prisma/client": "^5.17.0",
@@ -40,7 +40,7 @@
     "lucide-react": "^0.340.0",
     "moment": "^2.30.1",
     "next": "^14.2.12",
-    "next-auth": "^5.0.0-beta.18",
+    "next-auth": "^5.0.0-beta.25",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
