@@ -66,9 +66,9 @@ export default async function Home() {
     <main>
       <Background />
       <Parallax />
-      {/* <NowPlaying data={dataNowPlaying} /> */}
+      <NowPlaying data={dataNowPlaying} />
       <Popular data={dataPopular} />
-      {/* <Upcoming data={dataUpcoming} /> */}
+      <Upcoming data={dataUpcoming} />
     </main>
   );
 }
